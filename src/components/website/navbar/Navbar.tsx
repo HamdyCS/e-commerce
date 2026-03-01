@@ -1,16 +1,21 @@
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
 import DropDownList from "../../ui/DropDownList";
-import SearchIcon from "@mui/icons-material/Search";
-import Button from "@mui/material/Button";
-import LoginIcon from "@mui/icons-material/Login";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { i18n } = useTranslation();
   const location = useLocation();
+  const { t } = useTranslation();
+
+  function changeLang(lang: string) {
+    i18n.changeLanguage(lang);
+    document.documentElement.dir = i18n.dir();
+    setOpen(false);
+  }
 
   return (
     <div>
@@ -36,17 +41,11 @@ export default function Navbar() {
                   list={[
                     {
                       title: "English",
-                      onCLick: () => {
-                        i18n.changeLanguage("en");
-                        document.documentElement.dir = i18n.dir();
-                      },
+                      onCLick: () => changeLang("en"),
                     },
                     {
                       title: "العربية",
-                      onCLick: () => {
-                        i18n.changeLanguage("ar");
-                        document.documentElement.dir = i18n.dir();
-                      },
+                      onCLick: () => changeLang("ar"),
                     },
                   ]}
                 />
@@ -66,7 +65,7 @@ export default function Navbar() {
                 `${(x.isActive || location.pathname === "/home") && "underline underline-offset-4"}`
               }
             >
-              Home
+              {t("Home")}
             </NavLink>
             <NavLink
               to="/contact"
@@ -74,7 +73,7 @@ export default function Navbar() {
                 `${x.isActive && "underline underline-offset-4"}`
               }
             >
-              Contact
+              {t("Contact")}
             </NavLink>
             <NavLink
               to="/about"
@@ -82,7 +81,23 @@ export default function Navbar() {
                 `${x.isActive && "underline underline-offset-4"}`
               }
             >
-              About
+              {t("About")}
+            </NavLink>
+            <NavLink
+              to="/sign-up"
+              className={(x) =>
+                `${x.isActive && "underline underline-offset-4"}`
+              }
+            >
+              {t("Sign Up")}
+            </NavLink>
+            <NavLink
+              to="/login"
+              className={(x) =>
+                `${x.isActive && "underline underline-offset-4"}`
+              }
+            >
+              {t("Login")}
             </NavLink>
           </div>
           <div className="flex items-center gap-2">
@@ -94,12 +109,6 @@ export default function Navbar() {
               />
               <SearchIcon />
             </div>
-            <Button
-              className="bg-[#F5F5F5]! rounded text-black!"
-              endIcon={<LoginIcon />}
-            >
-              Login
-            </Button>
           </div>
         </div>
       </div>

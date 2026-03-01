@@ -1,11 +1,11 @@
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useRoutes } from "react-router-dom";
 import "./App.css";
-import WebsiteLayout from "./components/website/layout/WebsiteLayout";
-import WebsiteRoutes from "./routes/website/WebsiteRoutes";
 import DashboardLayout from "./components/dashboard/layout/DashboardLayout";
+import WebsiteLayout from "./components/website/layout/WebsiteLayout";
 import DashboardRoutes from "./routes/dashboard/DashboardRoutes";
-import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
+import WebsiteRoutes from "./routes/website/WebsiteRoutes";
 
 export default function App() {
   const { i18n } = useTranslation();
