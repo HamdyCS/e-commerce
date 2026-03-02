@@ -1,6 +1,7 @@
 import type { RouteObject } from "react-router-dom";
 import Home from "../../pages/website/Home";
 import SignUp from "../../pages/website/auth/SignUp";
+import Login from "../../pages/website/auth/Login";
 
 const WebsiteRoutes: RouteObject[] = [
   {
@@ -16,8 +17,12 @@ const WebsiteRoutes: RouteObject[] = [
     element: <h1>About</h1>,
   },
   {
-    path: "sign-up",
+    path: "signup",
     element: <SignUp />,
+  },
+  {
+    path: "login",
+    element: <Login />,
   },
   {
     path: "*",

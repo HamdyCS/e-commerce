@@ -5,12 +5,13 @@ import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import { useAppDispatch } from "../../../redux/hook/reduxHooks";
-import { setEmail } from "../../../redux/slices/signUpSlice";
-import { isEmailExist } from "../../../services/authService";
-import { sendOtp } from "../../../services/otpService";
-import Spinner from "../../loading/Spinner";
-import FieldError from "../../ui/FieldError";
+import { useAppDispatch } from "../../../../redux/hook/reduxHooks";
+import { setEmail } from "../../../../redux/slices/signUpSlice";
+import { isEmailExist } from "../../../../services/authService";
+import { sendOtp } from "../../../../services/otpService";
+import Button from "../../../ui/Button";
+import FieldError from "../../../ui/FieldError";
+import LoginByProviders from "../LoginByProviders";
 
 interface SendOtpProps {
   afterSend: () => void;
@@ -31,6 +32,7 @@ export default function SendOtp({ afterSend }: SendOtpProps) {
   const formik = useFormik({
     initialValues,
     validationSchema,
+    validateOnBlur: false,
     onSubmit: (values) => mutate(values.email),
   });
 
@@ -81,17 +83,18 @@ export default function SendOtp({ afterSend }: SendOtpProps) {
           )}
           {isError && <FieldError error={error?.message} />}
           <div className="flex flex-col gap-4">
-            <button
+            <Button
               className=" relative bg-blue-500 text-white p-2 rounded-md cursor-pointer block min-h-10"
-              disabled={isPending}
+              isLoading={isPending}
+              text={t("send")}
               type="submit"
-            >
-              {isPending && <Spinner size="20" />}
-              {!isPending && t("send")}
-            </button>
+              disabled={isPending}
+            />
           </div>
         </form>
       </AnimatePresence>
+
+      <LoginByProviders />
 
       <p className="text-center">
         {t("Already have an account?")}

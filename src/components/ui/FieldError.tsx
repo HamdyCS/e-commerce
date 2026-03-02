@@ -1,6 +1,8 @@
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 
 export default function FieldError({ error }: { error: string }) {
+  const { t } = useTranslation();
   return (
     <motion.p
       key={error}
@@ -9,7 +11,7 @@ export default function FieldError({ error }: { error: string }) {
       exit={{ opacity: 0, y: 10 }}
       className="text-red-500 select-none"
     >
-      {error}
+      {t(error)}
     </motion.p>
   );
 }

@@ -1,17 +1,17 @@
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useMutation } from "@tanstack/react-query";
+import { useFormik } from "formik";
+import { AnimatePresence } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import type { SignUpDto } from "../../../dtos/SignUpDto";
-import { useFormik } from "formik";
 import { useAppSelector } from "../../../redux/hook/reduxHooks";
-import { AnimatePresence } from "motion/react";
-import FieldError from "../../ui/FieldError";
-import { useMutation } from "@tanstack/react-query";
 import { signUp } from "../../../services/authService";
-import Spinner from "../../loading/Spinner";
-import { useEffect, useRef, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
+import Button from "../../ui/Button";
+import FieldError from "../../ui/FieldError";
 
 const validationSchema = Yup.object({
   firstName: Yup.string().required("First Name is required"),
@@ -87,6 +87,7 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
   const formik = useFormik({
     initialValues,
     validationSchema,
+    validateOnBlur: false,
     onSubmit: (values) => {
       const data: SignUpDto = {
         firstName: values.firstName,
@@ -222,14 +223,14 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
           {formik.touched.confirmPassword && formik.errors.confirmPassword && (
             <FieldError error={formik.errors.confirmPassword} />
           )}
-          {isError && <FieldError error="Something went wrong" />}
-          <button
+          {isError && <FieldError error={t("Something went wrong")} />}
+          <Button
             type="submit"
             className="relative bg-blue-500 disabled:bg-gray-500 text-white p-2 rounded-md cursor-pointer h-10"
-            disabled={isPending || !(formik.dirty && formik.isValid)}
-          >
-            {isPending ? <Spinner size="20" /> : t("Sign Up")}
-          </button>
+            disabled={isPending}
+            isLoading={isPending}
+            text={t("Sign Up")}
+          />
         </form>
       </AnimatePresence>
 

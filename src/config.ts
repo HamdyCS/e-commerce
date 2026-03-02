@@ -9,6 +9,10 @@ const config = {
     },
     signUp: "authentication/register-customer",
     isEmailExist: "authentication/is-email-exist",
+    login: "authentication/login",
+    googleLogin: "authentication/login/customer/google",
+    githubLogin: "authentication/login/customer/github",
+    returnUrl: "http://localhost:5173/",
   },
 };
 

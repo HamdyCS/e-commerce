@@ -2,9 +2,9 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import signup from "../../../assets/images/signup.jpg";
 import SignUpForm from "../../../components/website/forms/SignUpForm";
-import SendOtp from "../../../components/website/otp/SendOtp";
+import SendOtp from "../../../components/website/auth/otp/SendOtp";
 import { useTranslation } from "react-i18next";
-import CheckOtp from "../../../components/website/otp/CheckOtp";
+import CheckOtp from "../../../components/website/auth/otp/CheckOtp";
 
 export default function SignUp() {
   //1- send otp, 2- check otp, 3- sign up

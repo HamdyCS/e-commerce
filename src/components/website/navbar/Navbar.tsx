@@ -84,7 +84,7 @@ export default function Navbar() {
               {t("About")}
             </NavLink>
             <NavLink
-              to="/sign-up"
+              to="/signup"
               className={(x) =>
                 `${x.isActive && "underline underline-offset-4"}`
               }
@@ -105,7 +105,7 @@ export default function Navbar() {
               <input
                 type="text"
                 className="grow outline-0 min-w-50"
-                placeholder="What are you looking for?"
+                placeholder={t("What are you looking for?")}
               />
               <SearchIcon />
             </div>

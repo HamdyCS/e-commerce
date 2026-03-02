@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useRef, type ChangeEvent, type SubmitEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch, useAppSelector } from "../../../redux/hook/reduxHooks";
-import { checkOtp } from "../../../services/otpService";
-import { setOtp } from "../../../redux/slices/signUpSlice";
-import Spinner from "../../loading/Spinner";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hook/reduxHooks";
+import { setOtp } from "../../../../redux/slices/signUpSlice";
+import { checkOtp } from "../../../../services/otpService";
+import Button from "../../../ui/Button";
 
 interface CheckOtpProps {
   onContinue: () => void;
@@ -84,14 +84,13 @@ export default function CheckOtp({ onContinue }: CheckOtpProps) {
         </div>
         {isError && <p className="text-red-500">{error?.message}</p>}
         <div className="flex flex-col gap-4">
-          <button
+          <Button
             className="bg-blue-500 relative text-white p-2 rounded-md cursor-pointer block min-h-10"
             type="submit"
-            disabled={isPending}
-          >
-            {isPending && <Spinner size="20" />}
-            {!isPending && t("continue")}
-          </button>
+            disabled={isPending || otp.current.length !== 6}
+            isLoading={isPending}
+            text={t("continue")}
+          />
         </div>
       </form>
     </div>

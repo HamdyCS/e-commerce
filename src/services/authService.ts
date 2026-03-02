@@ -1,5 +1,6 @@
 import { Axios } from "../api/Axios";
 import config from "../config";
+import type { LoginDto } from "../dtos/LoginDto";
 import type { SignUpDto } from "../dtos/SignUpDto";
 
 export const isEmailExist = async (email: string) => {
@@ -14,5 +15,10 @@ export const signUp = async (data: SignUpDto, otp: string) => {
     `${config.auth.signUp}?otp=${otp}`,
     data,
   );
+  return response.data;
+};
+
+export const login = async (data: LoginDto) => {
+  const response = await Axios.post<boolean>(`${config.auth.login}`, data);
   return response.data;
 };
