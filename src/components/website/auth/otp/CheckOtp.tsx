@@ -1,9 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useRef, type ChangeEvent, type SubmitEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch, useAppSelector } from "../../../../redux/hook/reduxHooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../redux/hook/reduxHooks";
 import { setOtp } from "../../../../redux/slices/signUpSlice";
-import { checkOtp } from "../../../../services/otpService";
+import { checkOtp, sendOtp } from "../../../../services/otpService";
 import Button from "../../../ui/Button";
 
 interface CheckOtpProps {
@@ -14,7 +17,7 @@ export default function CheckOtp({ onContinue }: CheckOtpProps) {
   const inputRefs = useRef<HTMLInputElement[]>([]);
   const formRef = useRef<HTMLFormElement>(null);
   const otp = useRef<string[]>([]);
-  const { email } = useAppSelector((state) => state.signUp);
+  const { email } = useAppSelector((state) => state.otp);
   const dispatch = useAppDispatch();
 
   const { mutate, isPending, error, isError } = useMutation({
@@ -82,6 +85,16 @@ export default function CheckOtp({ onContinue }: CheckOtpProps) {
         <div className="flex gap-2 items-center justify-between">
           {inputElements}
         </div>
+        <button
+          type="button"
+          className="text-blue-500 hover:underline cursor-pointer min-h-10"
+          onClick={() => {
+            sendOtp(email);
+            inputRefs.current[0]?.focus();
+          }}
+        >
+          {t("Resend OTP?")}
+        </button>
         {isError && <p className="text-red-500">{error?.message}</p>}
         <div className="flex flex-col gap-4">
           <Button

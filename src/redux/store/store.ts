@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import signUpReducer from "../slices/signUpSlice";
+import otpReducer from "../slices/signUpSlice";
 
 export const store = configureStore({
   reducer: {
-    signUp: signUpReducer,
+    otp: otpReducer,
   },
 });
 

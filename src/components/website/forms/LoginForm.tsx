@@ -70,7 +70,8 @@ export default function LoginForm({ onForgetPassword }: LoginFormProps) {
           className="flex flex-col space-y-7 "
         >
           <input
-            type="text"
+            id="email"
+            type="email"
             name="email"
             value={formik.values.email}
             onChange={formik.handleChange}
@@ -83,35 +84,35 @@ export default function LoginForm({ onForgetPassword }: LoginFormProps) {
             <FieldError error={formik.errors.email} />
           )}
 
-          <div className="relative w-full">
+          <div className=" p-2   w-full border-b border-gray-300 focus-within:outline-2 rounded-md flex items-center gap-2">
             <input
+              id="password"
               type={showPassword ? "text" : "password"}
               name="password"
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder={t("Password")}
-              className="border-b border-gray-300 rounded-md p-2 w-full"
+              className=" border-none focus:outline-none grow"
             />
             <FontAwesomeIcon
               cursor={"pointer"}
               onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute top-1/2 -translate-y-1/2 right-2"
+              className=""
               color={showPassword ? "black" : "gray"}
               icon={showPassword ? faEye : faEyeSlash}
             />
           </div>
-          <button
-            type="button"
-            className="text-blue-500 hover:underline cursor-pointer min-h-10"
-            onClick={onForgetPassword}
-          >
-            {t("Forget Password")}
-          </button>
-
           {formik.touched.password && formik.errors.password && (
             <FieldError error={formik.errors.password} />
           )}
+          <button
+            type="button"
+            className="text-blue-500 hover:underline cursor-pointer min-h-10 text-start"
+            onClick={onForgetPassword}
+          >
+            {t("Forget Password?")}
+          </button>
 
           {isError && <FieldError error={t("Something went wrong")} />}
           <Button

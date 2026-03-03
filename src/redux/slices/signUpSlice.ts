@@ -1,17 +1,17 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-export interface signUpSliceState {
+export interface otpState {
   email: string;
   otp: string;
 }
 
-const initialState: signUpSliceState = {
+const initialState: otpState = {
   email: "",
   otp: "",
 };
 
-const signUpSlice = createSlice({
-  name: "signUp",
+const otpSlice = createSlice({
+  name: "otp",
   initialState,
   reducers: {
     setEmail(state, action: PayloadAction<string>) {
@@ -23,5 +23,5 @@ const signUpSlice = createSlice({
   },
 });
 
-export const { setEmail, setOtp } = signUpSlice.actions;
-export default signUpSlice.reducer;
+export const { setEmail, setOtp } = otpSlice.actions;
+export default otpSlice.reducer;

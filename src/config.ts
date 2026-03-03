@@ -13,6 +13,7 @@ const config = {
     googleLogin: "authentication/login/customer/google",
     githubLogin: "authentication/login/customer/github",
     returnUrl: "http://localhost:5173/",
+    resetPassword: "authentication/reset-password",
   },
 };
 

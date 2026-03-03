@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import type { SignUpDto } from "../../../dtos/SignUpDto";
+import type { RegisterDto } from "../../../dtos/RegisterDto";
 import { useAppSelector } from "../../../redux/hook/reduxHooks";
 import { signUp } from "../../../services/authService";
 import Button from "../../ui/Button";
@@ -48,7 +48,7 @@ const validationSchema = Yup.object({
     ),
   confirmPassword: Yup.string()
     .required("Confirm Password is required")
-    .equals([Yup.ref("password"), "Passwords do not match"]),
+    .equals([Yup.ref("password")], "Passwords do not match"),
 });
 
 const initialValues = {
@@ -66,7 +66,7 @@ interface SignUpFormProps {
 }
 
 export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
-  const { email, otp } = useAppSelector((state) => state.signUp);
+  const { email, otp } = useAppSelector((state) => state.otp);
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -78,7 +78,7 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
 
   const { mutate, isError, isPending } = useMutation({
     mutationKey: ["signUp"],
-    mutationFn: (data: SignUpDto) => signUp(data, otp),
+    mutationFn: (data: RegisterDto) => signUp(data),
     onSuccess: () => {
       navigate("/");
     },
@@ -89,13 +89,16 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
     validationSchema,
     validateOnBlur: false,
     onSubmit: (values) => {
-      const data: SignUpDto = {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        dateOfBirth: values.dateOfBirth,
-        phoneNumber: values.phoneNumber,
-        email: email,
-        password: values.password,
+      const data: RegisterDto = {
+        Otp: otp,
+        userDto: {
+          FirstName: values.firstName,
+          LastName: values.lastName,
+          DateOfBirth: values.dateOfBirth,
+          PhoneNumber: values.phoneNumber,
+          Email: email,
+          Password: values.password,
+        },
       };
       mutate(data);
     },
@@ -120,7 +123,6 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
             name="firstName"
             value={formik.values.firstName}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             placeholder={t("First Name")}
             className="border-b border-gray-300 rounded-md p-2 w-full"
             ref={focusInput}
@@ -145,7 +147,6 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
             name="dateOfBirth"
             value={formik.values.dateOfBirth}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             placeholder={t("Date of Birth")}
             className="border-b border-gray-300 rounded-md p-2"
           />
@@ -157,7 +158,6 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
             name="phoneNumber"
             value={formik.values.phoneNumber}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             placeholder={t("Phone Number")}
             className="border-b border-gray-300 rounded-md p-2"
           />
@@ -165,7 +165,8 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
             <FieldError error={formik.errors.phoneNumber} />
           )}
           <input
-            type="text"
+            id="email"
+            type="email"
             value={email}
             name="email"
             disabled
@@ -180,42 +181,41 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
             {t("Change Email")}
           </button>
 
-          <div className="relative w-full">
+          <div className=" p-2   w-full border-b border-gray-300 focus-within:outline-2 rounded-md flex items-center gap-2">
             <input
+              id="password"
               type={showPassword ? "text" : "password"}
               name="password"
               value={formik.values.password}
               onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
               placeholder={t("Password")}
-              className="border-b border-gray-300 rounded-md p-2 w-full"
+              className=" border-none focus:outline-none grow"
             />
             <FontAwesomeIcon
               cursor={"pointer"}
               onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute top-1/2 -translate-y-1/2 right-2"
+              className=""
               color={showPassword ? "black" : "gray"}
               icon={showPassword ? faEye : faEyeSlash}
             />
           </div>
-
           {formik.touched.password && formik.errors.password && (
             <FieldError error={formik.errors.password} />
           )}
-          <div className="relative w-full">
+
+          <div className=" p-2   w-full border-b border-gray-300 focus-within:outline-2 rounded-md flex items-center gap-2">
             <input
               type={showConfirmPassword ? "text" : "password"}
               name="confirmPassword"
               value={formik.values.confirmPassword}
               onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
               placeholder={t("Confirm Password")}
-              className="border-b border-gray-300 rounded-md p-2 w-full"
+              className=" border-none focus:outline-none grow"
             />
             <FontAwesomeIcon
               cursor={"pointer"}
               onClick={() => setShowConfirmPassword((prev) => !prev)}
-              className="absolute top-1/2 -translate-y-1/2 right-2"
+              className=""
               color={showConfirmPassword ? "black" : "gray"}
               icon={showConfirmPassword ? faEye : faEyeSlash}
             />

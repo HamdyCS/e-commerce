@@ -70,7 +70,6 @@ export default function SendOtp({ afterSend }: SendOtpProps) {
           <input
             type="text"
             name="email"
-            required
             placeholder={t("Email")}
             className="border-b border-gray-300 rounded-md p-2 block w-full"
             onChange={formik.handleChange}
