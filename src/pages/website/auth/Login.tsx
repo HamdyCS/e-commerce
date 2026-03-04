@@ -30,7 +30,7 @@ export default function SignUp() {
                 duration: 0.3,
               }}
             >
-              <LoginForm onForgetPassword={() => {}} />
+              <LoginForm />
             </motion.div>
           </AnimatePresence>
         </div>

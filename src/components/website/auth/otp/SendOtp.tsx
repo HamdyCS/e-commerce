@@ -15,6 +15,7 @@ import LoginByProviders from "../LoginByProviders";
 
 interface SendOtpProps {
   afterSend: () => void;
+  type: "signUp" | "forgetPassword";
 }
 
 const initialValues = {
@@ -25,7 +26,7 @@ const validationSchema = Yup.object({
   email: Yup.string().email().required("Email is required"),
 });
 
-export default function SendOtp({ afterSend }: SendOtpProps) {
+export default function SendOtp({ afterSend, type }: SendOtpProps) {
   const dispatch = useAppDispatch();
   const emailInputRef = useRef<HTMLInputElement>(null);
 
@@ -54,9 +55,12 @@ export default function SendOtp({ afterSend }: SendOtpProps) {
   async function handelMutate(email: string) {
     const isExist = await isEmailExist(email);
 
-    if (isExist) {
+    if (isExist && type === "signUp") {
       throw new Error("Email already exists");
+    } else if (!isExist && type === "forgetPassword") {
+      throw new Error("Email not exists");
     }
+
     await sendOtp(email);
 
     dispatch(setEmail(email));

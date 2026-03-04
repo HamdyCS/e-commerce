@@ -1,12 +1,12 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
-import signup from "../../../assets/images/signup.jpg";
-import SignUpForm from "../../../components/website/forms/SignUpForm";
-import SendOtp from "../../../components/website/auth/otp/SendOtp";
 import { useTranslation } from "react-i18next";
+import signup from "../../../assets/images/signup.jpg";
 import CheckOtp from "../../../components/website/auth/otp/CheckOtp";
+import SendOtp from "../../../components/website/auth/otp/SendOtp";
+import ResetPassword from "../../../components/website/auth/ResetPassword";
 
-export default function SignUp() {
+export default function ForgetPassword() {
   //1- send otp, 2- check otp, 3- sign up
   const [step, setStep] = useState(1);
   const { t } = useTranslation();
@@ -28,7 +28,7 @@ export default function SignUp() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <SendOtp type="signUp" afterSend={() => setStep(2)} />
+              <SendOtp type="forgetPassword" afterSend={() => setStep(2)} />
             </motion.div>
           )}
           {step === 2 && (
@@ -52,7 +52,7 @@ export default function SignUp() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <SignUpForm onChangeEmail={() => setStep(1)} />
+              <ResetPassword />
             </motion.div>
           )}
         </AnimatePresence>
