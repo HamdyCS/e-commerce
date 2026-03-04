@@ -13,10 +13,6 @@ import Button from "../../ui/Button";
 import FieldError from "../../ui/FieldError";
 import LoginByProviders from "../auth/LoginByProviders";
 
-interface LoginFormProps {
-  onForgetPassword: () => void;
-}
-
 const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
@@ -30,7 +26,7 @@ const initialValues: LoginDto = {
   password: "",
 };
 
-export default function LoginForm({ onForgetPassword }: LoginFormProps) {
+export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   const focusInput = useRef<HTMLInputElement>(null);
@@ -106,15 +102,14 @@ export default function LoginForm({ onForgetPassword }: LoginFormProps) {
           {formik.touched.password && formik.errors.password && (
             <FieldError error={formik.errors.password} />
           )}
-          <button
-            type="button"
+          <Link
+            to="/forget-password"
             className="text-blue-500 hover:underline cursor-pointer min-h-10 text-start"
-            onClick={onForgetPassword}
           >
             {t("Forget Password?")}
-          </button>
+          </Link>
 
-          {isError && <FieldError error={t("Something went wrong")} />}
+          {isError && <FieldError error={t("Invalid email or password")} />}
           <Button
             type="submit"
             className="relative bg-blue-500 disabled:bg-gray-500 text-white p-2 rounded-md cursor-pointer h-10"
