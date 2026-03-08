@@ -6,6 +6,7 @@ import DashboardLayout from "./components/dashboard/layout/DashboardLayout";
 import WebsiteLayout from "./components/website/layout/WebsiteLayout";
 import DashboardRoutes from "./routes/dashboard/DashboardRoutes";
 import WebsiteRoutes from "./routes/website/WebsiteRoutes";
+import AuthProvider from "./components/website/auth/AuthProvider";
 
 export default function App() {
   const { i18n } = useTranslation();
@@ -27,5 +28,5 @@ export default function App() {
     },
   ]);
 
-  return routes;
+  return <AuthProvider>{routes}</AuthProvider>;
 }

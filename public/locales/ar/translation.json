@@ -48,5 +48,14 @@
   "Email already exists": "البريد الإلكتروني موجود بالفعل",
   "Email not exists": "البريد الإلكتروني غير موجود",
   "Invalid email or password": "البريد الإلكتروني أو كلمة المرور غير صالحة",
-  "Reset Password": "إعادة تعيين كلمة المرور"
+  "Reset Password": "إعادة تعيين كلمة المرور",
+  "Manage My Account": "إدارة حسابي",
+  "My Orders": "طلباتي",
+  "My Addresses": "عناويني",
+  "Logout": "تسجيل الخروج",
+  "Create Account to E-commerce": "إنشاء حساب في E-commerce",
+  "Shop e-commerce for electronics, fashion, home essentials, and more. Enjoy great prices, exclusive deals, and fast delivery on millions of items. Your one-stop shop for everything you need": "تسوق من E-commerce للإلكترونيات والأزياء والمستلزمات المنزلية والمزيد. استمتع بأسعار رائعة وعروض حصرية وتوصيل سريع على ملايين المنتجات. وجهتك الشاملة لكل ما تحتاجه",
+  "404 Not Found": "404 الصفحة غير موجودة",
+  "Your visited page not found. You may go home page.": "الصفحة التي زرتها غير موجودة. يمكنك الذهاب إلى الصفحة الرئيسية.",
+  "Back to home page": "العودة إلى الصفحة الرئيسية"
 }

@@ -1,14 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import { useAppDispatch } from "../../../../redux/hook/reduxHooks";
-import { setEmail } from "../../../../redux/slices/signUpSlice";
-import { isEmailExist } from "../../../../services/authService";
-import { sendOtp } from "../../../../services/otpService";
+import { useSendOtp } from "../../../../hooks/auth";
 import Button from "../../../ui/Button";
 import FieldError from "../../../ui/FieldError";
 import LoginByProviders from "../LoginByProviders";
@@ -27,9 +23,7 @@ const validationSchema = Yup.object({
 });
 
 export default function SendOtp({ afterSend, type }: SendOtpProps) {
-  const dispatch = useAppDispatch();
   const emailInputRef = useRef<HTMLInputElement>(null);
-
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -37,11 +31,9 @@ export default function SendOtp({ afterSend, type }: SendOtpProps) {
     onSubmit: (values) => mutate(values.email),
   });
 
-  const { mutate, isPending, isError, error } = useMutation({
-    mutationFn: handelMutate,
-    onSuccess: () => {
-      afterSend();
-    },
+  const { mutate, isPending, isError, error } = useSendOtp({
+    type,
+    onSuccess: afterSend,
   });
 
   const { t } = useTranslation();
@@ -50,21 +42,6 @@ export default function SendOtp({ afterSend, type }: SendOtpProps) {
   useEffect(() => {
     emailInputRef.current?.focus();
   }, []);
-
-  //handel mutate
-  async function handelMutate(email: string) {
-    const isExist = await isEmailExist(email);
-
-    if (isExist && type === "signUp") {
-      throw new Error("Email already exists");
-    } else if (!isExist && type === "forgetPassword") {
-      throw new Error("Email not exists");
-    }
-
-    await sendOtp(email);
-
-    dispatch(setEmail(email));
-  }
 
   return (
     <div className="  space-y-4 w-full max-w-100 p-5 rounded-md overflow-hidden">

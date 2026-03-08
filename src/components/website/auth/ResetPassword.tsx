@@ -1,18 +1,17 @@
 import { AnimatePresence } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import * as Yup from "yup";
-import { useTranslation } from "react-i18next";
-import { useEffect, useRef, useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { resetPassword } from "../../../services/authService";
-import type ResetPasswordDto from "../../../dtos/ResetPasswordDto";
-import { useFormik } from "formik";
-import { useAppSelector } from "../../../redux/hook/reduxHooks";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import FieldError from "../../ui/FieldError";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useFormik } from "formik";
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import * as Yup from "yup";
+import type ResetPasswordDto from "../../../dtos/ResetPasswordDto";
+import { useResetPassword } from "../../../hooks/auth";
+import { useAppSelector } from "../../../redux/hook/reduxHooks";
 import Button from "../../ui/Button";
+import FieldError from "../../ui/FieldError";
 
 interface formType {
   newPassword: "";
@@ -47,15 +46,7 @@ export default function ResetPassword() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { email, otp } = useAppSelector((state) => state.otp);
 
-  const navigate = useNavigate();
-
-  const { mutate, isPending, isError } = useMutation({
-    mutationKey: ["reset-password"],
-    mutationFn: (data: ResetPasswordDto) => resetPassword(data),
-    onSuccess: () => {
-      navigate("/login");
-    },
-  });
+  const { mutate, isPending, isError } = useResetPassword();
 
   const focusInput = useRef<HTMLInputElement>(null);
   const formik = useFormik({

@@ -1,6 +1,7 @@
 import type { RouteObject } from "react-router-dom";
 import Home from "../../pages/website/Home";
 import AuthRoutes from "./auth/AuthRoutes";
+import NotFound from "../../pages/errors/NotFound";
 
 const WebsiteRoutes: RouteObject[] = [
   {
@@ -16,8 +17,12 @@ const WebsiteRoutes: RouteObject[] = [
     element: <h1>About</h1>,
   },
   {
+    path: "contact",
+    element: <h1>Contact</h1>,
+  },
+  {
     path: "*",
-    element: <h1>not found</h1>,
+    element: <NotFound />,
   },
 
   ...AuthRoutes,

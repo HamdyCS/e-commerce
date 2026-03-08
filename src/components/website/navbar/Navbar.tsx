@@ -1,12 +1,23 @@
+import {
+  faBagShopping,
+  faCircleUser,
+  faLocationDot,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SearchIcon from "@mui/icons-material/Search";
+import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
+import { useAppSelector } from "../../../redux/hook/reduxHooks";
 import DropDownList from "../../ui/DropDownList";
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
+  const [showLanguageList, setShowLanguageList] = useState(false);
+  const [showAccountList, setShowAccountList] = useState(false);
+  const { user } = useAppSelector((state) => state.auth);
+
   const { i18n } = useTranslation();
   const location = useLocation();
   const { t } = useTranslation();
@@ -14,7 +25,7 @@ export default function Navbar() {
   function changeLang(lang: string) {
     i18n.changeLanguage(lang);
     document.documentElement.dir = i18n.dir();
-    setOpen(false);
+    setShowLanguageList(false);
   }
 
   return (
@@ -24,20 +35,23 @@ export default function Navbar() {
           <div className="relative justify-self-end">
             <div
               className=" flex items-center gap-1 cursor-pointer"
-              onClick={() => setOpen((prev) => !prev)}
+              onClick={() => setShowLanguageList((prev) => !prev)}
             >
               <p>{i18n.language === "en" ? "English" : "العربية"}</p>
               <KeyboardArrowDownIcon
                 className="text-white "
                 style={{
-                  transform: open ? "rotate(180deg)" : "rotate(0deg)",
+                  transform: showLanguageList
+                    ? "rotate(180deg)"
+                    : "rotate(0deg)",
                   transition: "transform 0.3s ease-in-out",
                 }}
               />
             </div>
-            {open && (
-              <div className="absolute top-10 -left-1.25 z-50">
+            <AnimatePresence>
+              {showLanguageList && (
                 <DropDownList
+                  onOverlayClick={() => setShowLanguageList(false)}
                   list={[
                     {
                       title: "English",
@@ -48,15 +62,21 @@ export default function Navbar() {
                       onCLick: () => changeLang("ar"),
                     },
                   ]}
+                  className="absolute top-10 -left-1.25 z-50"
                 />
-              </div>
-            )}
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>
       <div className="border-b border-b-black/10">
         <div className="container mx-auto px-2 py-5 flex items-center justify-between gap-5 flex-wrap">
-          <h1 className="font-bold text-2xl">E-Commerce</h1>
+          <NavLink
+            to="/"
+            className="font-bold text-2xl cursor-pointer hover:text-blue-500 transition-colors"
+          >
+            E-Commerce
+          </NavLink>
           <div className="flex items-center justify-between gap-5 ">
             <NavLink
               to="/"
@@ -83,24 +103,28 @@ export default function Navbar() {
             >
               {t("About")}
             </NavLink>
-            <NavLink
-              to="/signup"
-              className={(x) =>
-                `${x.isActive && "underline underline-offset-4"}`
-              }
-            >
-              {t("Sign Up")}
-            </NavLink>
-            <NavLink
-              to="/login"
-              className={(x) =>
-                `${x.isActive && "underline underline-offset-4"}`
-              }
-            >
-              {t("Login")}
-            </NavLink>
+            {!user && (
+              <>
+                <NavLink
+                  to="/signup"
+                  className={(x) =>
+                    `${x.isActive && "underline underline-offset-4"}`
+                  }
+                >
+                  {t("Sign Up")}
+                </NavLink>
+                <NavLink
+                  to="/login"
+                  className={(x) =>
+                    `${x.isActive && "underline underline-offset-4"}`
+                  }
+                >
+                  {t("Login")}
+                </NavLink>
+              </>
+            )}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between  grow lg:grow-0  gap-2">
             <div className="flex gap-2 items-center bg-[#F5F5F5] px-2 text-[12px] focus-within:border-b">
               <input
                 type="text"
@@ -109,6 +133,47 @@ export default function Navbar() {
               />
               <SearchIcon />
             </div>
+            {user && (
+              <div className="cursor-pointer relative select-none">
+                <FontAwesomeIcon
+                  icon={faCircleUser}
+                  size="xl"
+                  color="red"
+                  className="hover:text-blue-500 relative z-20"
+                  onClick={() => setShowAccountList((prev) => !prev)}
+                />
+                <AnimatePresence>
+                  {showAccountList && (
+                    <DropDownList
+                      onOverlayClick={() => setShowAccountList(false)}
+                      list={[
+                        {
+                          title: t("Manage My Account"),
+                          onCLick: () => {},
+                          icon: <FontAwesomeIcon icon={faCircleUser} />,
+                        },
+                        {
+                          title: t("My Orders"),
+                          onCLick: () => {},
+                          icon: <FontAwesomeIcon icon={faBagShopping} />,
+                        },
+                        {
+                          title: t("My Addresses"),
+                          onCLick: () => {},
+                          icon: <FontAwesomeIcon icon={faLocationDot} />,
+                        },
+                        {
+                          title: t("Logout"),
+                          onCLick: () => {},
+                          icon: <FontAwesomeIcon icon={faCircleUser} />,
+                        },
+                      ]}
+                      className="absolute top-8 right-0 z-10 "
+                    />
+                  )}
+                </AnimatePresence>
+              </div>
+            )}
           </div>
         </div>
       </div>

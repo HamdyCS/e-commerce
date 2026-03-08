@@ -1,15 +1,15 @@
+import { Helmet } from "@dr.pogodin/react-helmet";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useMutation } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import { AnimatePresence } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import type { RegisterDto } from "../../../dtos/RegisterDto";
+import { useRegister } from "../../../hooks/auth";
 import { useAppSelector } from "../../../redux/hook/reduxHooks";
-import { signUp } from "../../../services/authService";
 import Button from "../../ui/Button";
 import FieldError from "../../ui/FieldError";
 
@@ -74,15 +74,8 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
   const focusInput = useRef<HTMLInputElement>(null);
 
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
-  const { mutate, isError, isPending } = useMutation({
-    mutationKey: ["signUp"],
-    mutationFn: (data: RegisterDto) => signUp(data),
-    onSuccess: () => {
-      navigate("/");
-    },
-  });
+  const { mutate, isError, isPending } = useRegister();
 
   const formik = useFormik({
     initialValues,
@@ -111,6 +104,11 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
 
   return (
     <div className="space-y-4 w-full p-5">
+      <Helmet>
+        <title>{t("Create Account")}</title>
+        <meta name="description" content={t("Create Account to E-commerce")} />
+        <meta name="keywords" content="create account, e-commerce, auth" />
+      </Helmet>
       <h2 className="text-[36px]">{t("Create Account")}</h2>
       <p className="text-[16px] text-black">{t("Enter your details below")}</p>
       <AnimatePresence>

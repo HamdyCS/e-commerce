@@ -1,14 +1,14 @@
+import { Helmet } from "@dr.pogodin/react-helmet";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useMutation } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import { AnimatePresence } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import type { LoginDto } from "../../../dtos/LoginDto";
-import { login } from "../../../services/authService";
+import { useLogin } from "../../../hooks/auth";
 import Button from "../../ui/Button";
 import FieldError from "../../ui/FieldError";
 import LoginByProviders from "../auth/LoginByProviders";
@@ -28,19 +28,12 @@ const initialValues: LoginDto = {
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-
   const focusInput = useRef<HTMLInputElement>(null);
 
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
-  const { mutate, isError, isPending } = useMutation({
-    mutationKey: ["login"],
-    mutationFn: (data: LoginDto) => login(data),
-    onSuccess: () => {
-      navigate("/");
-    },
-  });
+  //use Login hook
+  const { mutate, isError, isPending } = useLogin();
 
   const formik = useFormik({
     initialValues,
@@ -58,6 +51,11 @@ export default function LoginForm() {
 
   return (
     <div className="space-y-4 w-full p-5">
+      <Helmet>
+        <title>{t("Login")}</title>
+        <meta name="description" content={t("Login to E-commerce")} />
+        <meta name="keywords" content="login, e-commerce, auth" />
+      </Helmet>
       <h2 className="text-[36px]">{t("Login to E-commerce")}</h2>
       <p className="text-[16px] text-black">{t("Enter your details below")}</p>
       <AnimatePresence>

@@ -1,12 +1,8 @@
-import { useMutation } from "@tanstack/react-query";
 import { useEffect, useRef, type ChangeEvent, type SubmitEvent } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../../redux/hook/reduxHooks";
-import { setOtp } from "../../../../redux/slices/signUpSlice";
-import { checkOtp, sendOtp } from "../../../../services/otpService";
+import { useCheckOtp } from "../../../../hooks/auth";
+import { useAppSelector } from "../../../../redux/hook/reduxHooks";
+import { sendOtp } from "../../../../services/otpService";
 import Button from "../../../ui/Button";
 
 interface CheckOtpProps {
@@ -18,14 +14,10 @@ export default function CheckOtp({ onContinue }: CheckOtpProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const otp = useRef<string[]>([]);
   const { email } = useAppSelector((state) => state.otp);
-  const dispatch = useAppDispatch();
 
-  const { mutate, isPending, error, isError } = useMutation({
-    mutationFn: () => checkOtp(email, otp.current.join("")),
-    onSuccess: () => {
-      dispatch(setOtp(otp.current.join("")));
-      onContinue();
-    },
+  //check otp
+  const { mutate, isPending, error, isError } = useCheckOtp({
+    onSuccess: onContinue,
   });
 
   const { t } = useTranslation();
@@ -60,7 +52,7 @@ export default function CheckOtp({ onContinue }: CheckOtpProps) {
     //check if otp is valid
     if (otp.current.length !== 6) return;
 
-    mutate();
+    mutate({ otp: otp.current.join(""), email });
   }
 
   const inputElements = Array.from({ length: 6 }, (_, index) => (
