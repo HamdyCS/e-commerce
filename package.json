@@ -23,6 +23,7 @@
     "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/vite": "^4.2.1",
     "@tanstack/react-query": "^5.90.21",
+    "@theme-toggles/react": "^4.1.0",
     "axios": "^1.13.6",
     "formik": "^2.4.9",
     "i18next": "^25.8.13",

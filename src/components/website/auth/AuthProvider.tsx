@@ -32,7 +32,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
   //show loading until get auth user
   return isLoading ? (
-    <div className="flex h-screen items-center justify-center">
+    <div className="flex h-screen items-center justify-center dark:bg-primary-dark-bg">
       <Spinner size="50" showOverlay={false} color="blue" />
     </div>
   ) : (

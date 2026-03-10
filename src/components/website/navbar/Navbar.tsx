@@ -9,9 +9,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../redux/hook/reduxHooks";
 import DropDownList from "../../ui/DropDownList";
+import ToggleTheme from "../../theme/ToggleTheme";
 
 export default function Navbar() {
   const [showLanguageList, setShowLanguageList] = useState(false);
@@ -20,6 +21,7 @@ export default function Navbar() {
 
   const { i18n } = useTranslation();
   const location = useLocation();
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   function changeLang(lang: string) {
@@ -30,9 +32,10 @@ export default function Navbar() {
 
   return (
     <div>
-      <div className=" bg-black select-none">
+      <div className=" bg-black dark:bg-primary-card-dark-bg select-none">
         <div className="container px-2 py-4 mx-auto text-white">
-          <div className="relative justify-self-end">
+          <div className="relative justify-self-end flex items-center gap-2">
+            <ToggleTheme />
             <div
               className=" flex items-center gap-1 cursor-pointer"
               onClick={() => setShowLanguageList((prev) => !prev)}
@@ -69,7 +72,7 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-      <div className="border-b border-b-black/10">
+      <div className="border-b border-b-black/10 dark:border-b-white/10">
         <div className="container mx-auto px-2 py-5 flex items-center justify-between gap-5 flex-wrap">
           <NavLink
             to="/"
@@ -125,7 +128,7 @@ export default function Navbar() {
             )}
           </div>
           <div className="flex items-center justify-between  grow lg:grow-0  gap-2">
-            <div className="flex gap-2 items-center bg-[#F5F5F5] px-2 text-[12px] focus-within:border-b">
+            <div className="flex gap-2 items-center bg-[#F5F5F5] dark:bg-transparent px-2 text-[12px] focus-within:border-b">
               <input
                 type="text"
                 className="grow outline-0 min-w-50"
@@ -149,7 +152,10 @@ export default function Navbar() {
                       list={[
                         {
                           title: t("Manage My Account"),
-                          onCLick: () => {},
+                          onCLick: () => {
+                            navigate("/my-account");
+                            setShowAccountList(false);
+                          },
                           icon: <FontAwesomeIcon icon={faCircleUser} />,
                         },
                         {

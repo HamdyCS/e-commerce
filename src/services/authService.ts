@@ -1,9 +1,10 @@
 import { Axios } from "../api/Axios";
 import config from "../config";
 import type { LoginDto } from "../dtos/LoginDto";
-import type { RegisterDto } from "../dtos/RegisterDto";
-import type ResetPasswordDto from "../dtos/ResetPasswordDto";
+import type { SignUpDto } from "../dtos/SignUpDto";
+import type ForgetPasswordDto from "../dtos/ForgetPasswordDto";
 import type { UserDto } from "../dtos/UserDto";
+import type UpdateInfoDto from "../dtos/UpdateInfoDto";
 
 export const isEmailExist = async (email: string) => {
   const response = await Axios.get<boolean>(
@@ -12,7 +13,7 @@ export const isEmailExist = async (email: string) => {
   return response.data;
 };
 
-export const signUp = async (data: RegisterDto) => {
+export const signUp = async (data: SignUpDto) => {
   const response = await Axios.post<UserDto>(`${config.auth.signUp}`, data);
   return response.data;
 };
@@ -22,8 +23,8 @@ export const login = async (data: LoginDto) => {
   return response.data;
 };
 
-export const resetPassword = async (data: ResetPasswordDto) => {
-  const response = await Axios.put(`${config.auth.resetPassword}`, data);
+export const resetPassword = async (data: ForgetPasswordDto) => {
+  const response = await Axios.put(`${config.auth.forgetPassword}`, data);
   return response.data;
 };
 
@@ -34,5 +35,10 @@ export const getAuthUser = async () => {
 
 export const refreshToken = async () => {
   const response = await Axios.post(`${config.auth.refreshToken}`);
+  return response.data;
+};
+
+export const updateInfo = async (data: UpdateInfoDto) => {
+  const response = await Axios.put<UserDto>(`${config.auth.updateInfo}`, data);
   return response.data;
 };

@@ -11,19 +11,20 @@ import {
   login,
   resetPassword,
   signUp,
+  updateInfo,
 } from "../services/authService";
 import { checkOtp, sendOtp } from "../services/otpService";
 import type { UseSendOtpOptions } from "./types/UseSendOtpOptions";
 import type { UseHookOptions } from "./types/UseHookOptions";
-import type ResetPasswordDto from "../dtos/ResetPasswordDto";
-import type { RegisterDto } from "../dtos/RegisterDto";
+import type ForgetPasswordDto from "../dtos/ForgetPasswordDto";
+import type { SignUpDto } from "../dtos/SignUpDto";
 
 //register
 export function useRegister() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  return useMutation<UserDto, AxiosError, RegisterDto>({
+  return useMutation<UserDto, AxiosError, SignUpDto>({
     mutationKey: ["signUp"],
     mutationFn: signUp,
     onSuccess: (data) => {
@@ -55,7 +56,7 @@ export function useLogin() {
 export function useResetPassword() {
   const navigate = useNavigate();
 
-  return useMutation<any, AxiosError, ResetPasswordDto>({
+  return useMutation<any, AxiosError, ForgetPasswordDto>({
     mutationKey: ["reset-password"],
     mutationFn: resetPassword,
     onSuccess: () => {
@@ -104,6 +105,21 @@ export function useCheckOtp({ onSuccess }: UseHookOptions<void>) {
     onSuccess: (otp: string) => {
       dispatch(setOtp(otp));
       onSuccess?.();
+    },
+  });
+}
+
+//update info
+export function useUpdateInfo() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  return useMutation({
+    mutationKey: ["updateInfo"],
+    mutationFn: updateInfo,
+    onSuccess: (data) => {
+      dispatch(setAuthUser(data));
+      navigate("/");
     },
   });
 }

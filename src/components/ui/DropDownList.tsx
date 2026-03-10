@@ -43,7 +43,7 @@ export default function DropDownList({
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 10 }}
         transition={{ duration: 0.3 }}
-        className={`px-4 py-2 inline-block rounded border border-white/10 bg-black/20 text-black backdrop-blur-[150px] ${className}`}
+        className={`px-4 py-2 inline-block rounded border border-white/10 bg-black/20  text-primary-text-dark dark:text-primary-text-light backdrop-blur-[150px] ${className}`}
       >
         {list.map((item, index) => (
           <li

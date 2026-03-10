@@ -7,11 +7,12 @@ import { useFormik } from "formik";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
-import type ResetPasswordDto from "../../../dtos/ResetPasswordDto";
+import type ForgetPasswordDto from "../../../dtos/ForgetPasswordDto";
 import { useResetPassword } from "../../../hooks/auth";
 import { useAppSelector } from "../../../redux/hook/reduxHooks";
 import Button from "../../ui/Button";
 import FieldError from "../../ui/FieldError";
+import Input from "../../ui/Input";
 
 interface formType {
   newPassword: "";
@@ -40,7 +41,7 @@ const validationSchema = Yup.object({
     .equals([Yup.ref("newPassword")], "Passwords do not match"),
 });
 
-export default function ResetPassword() {
+export default function ForgetPasswordForm() {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -53,7 +54,7 @@ export default function ResetPassword() {
     initialValues,
     validationSchema,
     onSubmit: (values: formType) => {
-      const data: ResetPasswordDto = {
+      const data: ForgetPasswordDto = {
         Password: values.newPassword,
         Email: email,
         Otp: otp,
@@ -71,21 +72,19 @@ export default function ResetPassword() {
       <h2 className="text-[36px]">{t("Reset Password")}</h2>
       <AnimatePresence>
         <form onSubmit={formik.handleSubmit} className="space-y-4">
-          <div className=" p-2   w-full border-b border-gray-300 focus-within:outline-2 rounded-md flex items-center gap-2">
-            <input
+          <div className="relative">
+            <Input
               id="newPassword"
               type={showPassword ? "text" : "password"}
               name="newPassword"
               value={formik.values.newPassword}
               onChange={formik.handleChange}
               placeholder={t("Password")}
-              className=" border-none focus:outline-none grow"
             />
             <FontAwesomeIcon
               cursor={"pointer"}
               onClick={() => setShowPassword((prev) => !prev)}
-              className=""
-              color={showPassword ? "black" : "gray"}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-blue-500"
               icon={showPassword ? faEye : faEyeSlash}
             />
           </div>
@@ -93,20 +92,19 @@ export default function ResetPassword() {
             <FieldError error={formik.errors.newPassword} />
           )}
 
-          <div className=" p-2   w-full border-b border-gray-300 focus-within:outline-2 rounded-md flex items-center gap-2">
-            <input
+          <div className="relative">
+            <Input
+              id="confirmPassword"
               type={showConfirmPassword ? "text" : "password"}
               name="confirmPassword"
               value={formik.values.confirmPassword}
               onChange={formik.handleChange}
               placeholder={t("Confirm Password")}
-              className=" border-none focus:outline-none grow"
             />
             <FontAwesomeIcon
               cursor={"pointer"}
               onClick={() => setShowConfirmPassword((prev) => !prev)}
-              className=""
-              color={showConfirmPassword ? "black" : "gray"}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-blue-500"
               icon={showConfirmPassword ? faEye : faEyeSlash}
             />
           </div>

@@ -1,4 +1,3 @@
-import { Helmet } from "@dr.pogodin/react-helmet";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFormik } from "formik";
@@ -7,11 +6,12 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import type { RegisterDto } from "../../../dtos/RegisterDto";
+import type { SignUpDto } from "../../../dtos/SignUpDto";
 import { useRegister } from "../../../hooks/auth";
 import { useAppSelector } from "../../../redux/hook/reduxHooks";
 import Button from "../../ui/Button";
 import FieldError from "../../ui/FieldError";
+import Input from "../../ui/Input";
 
 const validationSchema = Yup.object({
   firstName: Yup.string().required("First Name is required"),
@@ -82,7 +82,7 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
     validationSchema,
     validateOnBlur: false,
     onSubmit: (values) => {
-      const data: RegisterDto = {
+      const data: SignUpDto = {
         Otp: otp,
         userDto: {
           FirstName: values.firstName,
@@ -104,11 +104,6 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
 
   return (
     <div className="space-y-4 w-full p-5">
-      <Helmet>
-        <title>{t("Create Account")}</title>
-        <meta name="description" content={t("Create Account to E-commerce")} />
-        <meta name="keywords" content="create account, e-commerce, auth" />
-      </Helmet>
       <h2 className="text-[36px]">{t("Create Account")}</h2>
       <p className="text-[16px] text-black">{t("Enter your details below")}</p>
       <AnimatePresence>
@@ -116,60 +111,55 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
           onSubmit={formik.handleSubmit}
           className="flex flex-col space-y-7 "
         >
-          <input
+          <Input
             type="text"
             name="firstName"
             value={formik.values.firstName}
             onChange={formik.handleChange}
             placeholder={t("First Name")}
-            className="border-b border-gray-300 rounded-md p-2 w-full"
             ref={focusInput}
           />
           {formik.touched.firstName && formik.errors.firstName && (
             <FieldError error={formik.errors.firstName} />
           )}
-          <input
+          <Input
             type="text"
             name="lastName"
             value={formik.values.lastName}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             placeholder={t("Last Name")}
-            className="border-b border-gray-300 rounded-md p-2 w-full"
           />
           {formik.touched.lastName && formik.errors.lastName && (
             <FieldError error={formik.errors.lastName} />
           )}
-          <input
+          <Input
             type="date"
             name="dateOfBirth"
             value={formik.values.dateOfBirth}
             onChange={formik.handleChange}
             placeholder={t("Date of Birth")}
-            className="border-b border-gray-300 rounded-md p-2"
           />
           {formik.touched.dateOfBirth && formik.errors.dateOfBirth && (
             <FieldError error={formik.errors.dateOfBirth} />
           )}
-          <input
+          <Input
             type="text"
             name="phoneNumber"
             value={formik.values.phoneNumber}
             onChange={formik.handleChange}
             placeholder={t("Phone Number")}
-            className="border-b border-gray-300 rounded-md p-2"
           />
           {formik.touched.phoneNumber && formik.errors.phoneNumber && (
             <FieldError error={formik.errors.phoneNumber} />
           )}
-          <input
+          <Input
             id="email"
             type="email"
             value={email}
             name="email"
             disabled
             placeholder={t("Email")}
-            className="border border-gray-300 rounded-md p-2 bg-gray-300"
           />
           <button
             type="button"
@@ -179,21 +169,20 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
             {t("Change Email")}
           </button>
 
-          <div className=" p-2   w-full border-b border-gray-300 focus-within:outline-2 rounded-md flex items-center gap-2">
-            <input
+          <div className="relative">
+            <Input
               id="password"
               type={showPassword ? "text" : "password"}
               name="password"
               value={formik.values.password}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               placeholder={t("Password")}
-              className=" border-none focus:outline-none grow"
             />
             <FontAwesomeIcon
               cursor={"pointer"}
               onClick={() => setShowPassword((prev) => !prev)}
-              className=""
-              color={showPassword ? "black" : "gray"}
+              className="absolute right-0 top-1/2 -translate-y-1/2 select-none text-blue-500 mr-2"
               icon={showPassword ? faEye : faEyeSlash}
             />
           </div>
@@ -201,21 +190,21 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
             <FieldError error={formik.errors.password} />
           )}
 
-          <div className=" p-2   w-full border-b border-gray-300 focus-within:outline-2 rounded-md flex items-center gap-2">
-            <input
+          <div className="relative">
+            <Input
+              id="confirm-password"
               type={showConfirmPassword ? "text" : "password"}
               name="confirmPassword"
               value={formik.values.confirmPassword}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               placeholder={t("Confirm Password")}
-              className=" border-none focus:outline-none grow"
             />
             <FontAwesomeIcon
               cursor={"pointer"}
               onClick={() => setShowConfirmPassword((prev) => !prev)}
-              className=""
-              color={showConfirmPassword ? "black" : "gray"}
-              icon={showConfirmPassword ? faEye : faEyeSlash}
+              className="absolute right-0 top-1/2 -translate-y-1/2 select-none text-blue-500 mr-2"
+              icon={showPassword ? faEye : faEyeSlash}
             />
           </div>
           {formik.touched.confirmPassword && formik.errors.confirmPassword && (

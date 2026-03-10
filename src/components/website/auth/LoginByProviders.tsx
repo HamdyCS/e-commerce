@@ -19,14 +19,14 @@ export default function LoginByProviders() {
   return (
     <>
       <button
-        className="w-full rounded-md bg-white hover:bg-gray-100 cursor-pointer transition p-2 flex items-center justify-center gap-2 border-2"
+        className="w-full rounded-md   hover:bg-gray-300/20 cursor-pointer transition p-2 flex items-center justify-center gap-2 border-2"
         onClick={() => handleLogin("google")}
       >
         <FontAwesomeIcon icon={faGoogle} />
         <p className="font-bold">{t("Continue with Google")}</p>
       </button>
       <button
-        className="w-full rounded-md bg-white hover:bg-gray-100 cursor-pointer transition p-2 flex items-center justify-center gap-2 border-2"
+        className="w-full rounded-md hover:bg-gray-300/20 cursor-pointer transition p-2 flex items-center justify-center gap-2 border-2"
         onClick={() => handleLogin("github")}
       >
         <FontAwesomeIcon icon={faGithub} />

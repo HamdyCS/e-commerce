@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { useSendOtp } from "../../../../hooks/auth";
 import Button from "../../../ui/Button";
 import FieldError from "../../../ui/FieldError";
+import Input from "../../../ui/Input";
 import LoginByProviders from "../LoginByProviders";
 
 interface SendOtpProps {
@@ -23,7 +24,7 @@ const validationSchema = Yup.object({
 });
 
 export default function SendOtp({ afterSend, type }: SendOtpProps) {
-  const emailInputRef = useRef<HTMLInputElement>(null);
+  const focusInput = useRef<HTMLInputElement>(null);
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -40,7 +41,7 @@ export default function SendOtp({ afterSend, type }: SendOtpProps) {
 
   //focus on email input
   useEffect(() => {
-    emailInputRef.current?.focus();
+    focusInput.current?.focus();
   }, []);
 
   return (
@@ -48,15 +49,15 @@ export default function SendOtp({ afterSend, type }: SendOtpProps) {
       <h2 className="text-[36px]">{t("Send OTP")}</h2>
       <AnimatePresence>
         <form onSubmit={formik.handleSubmit} className="space-y-4">
-          <input
+          <Input
             type="text"
             name="email"
             placeholder={t("Email")}
-            className="border-b border-gray-300 rounded-md p-2 block w-full"
+            className=""
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.email}
-            ref={emailInputRef}
+            ref={focusInput}
           />
           {formik.touched.email && formik.errors.email && (
             <FieldError error={formik.errors.email} />

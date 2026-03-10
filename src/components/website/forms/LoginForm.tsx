@@ -1,4 +1,3 @@
-import { Helmet } from "@dr.pogodin/react-helmet";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFormik } from "formik";
@@ -51,11 +50,6 @@ export default function LoginForm() {
 
   return (
     <div className="space-y-4 w-full p-5">
-      <Helmet>
-        <title>{t("Login")}</title>
-        <meta name="description" content={t("Login to E-commerce")} />
-        <meta name="keywords" content="login, e-commerce, auth" />
-      </Helmet>
       <h2 className="text-[36px]">{t("Login to E-commerce")}</h2>
       <p className="text-[16px] text-black">{t("Enter your details below")}</p>
       <AnimatePresence>
@@ -71,14 +65,14 @@ export default function LoginForm() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             placeholder={t("Email")}
-            className="border-b border-gray-300 rounded-md p-2 w-full"
+            className="border-b border-gray-300  rounded-md p-2 w-full"
             ref={focusInput}
           />
           {formik.touched.email && formik.errors.email && (
             <FieldError error={formik.errors.email} />
           )}
 
-          <div className=" p-2   w-full border-b border-gray-300 focus-within:outline-2 rounded-md flex items-center gap-2">
+          <div className="relative">
             <input
               id="password"
               type={showPassword ? "text" : "password"}
@@ -87,16 +81,16 @@ export default function LoginForm() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder={t("Password")}
-              className=" border-none focus:outline-none grow"
+              className="w-full p-2 border-b border-gray-300"
             />
             <FontAwesomeIcon
               cursor={"pointer"}
               onClick={() => setShowPassword((prev) => !prev)}
-              className=""
-              color={showPassword ? "black" : "gray"}
+              className="absolute right-0 top-1/2 -translate-y-1/2 select-none text-blue-500 mr-2"
               icon={showPassword ? faEye : faEyeSlash}
             />
           </div>
+
           {formik.touched.password && formik.errors.password && (
             <FieldError error={formik.errors.password} />
           )}

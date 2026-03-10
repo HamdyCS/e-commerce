@@ -5,7 +5,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 export default function Footer() {
   return (
-    <div className="bg-black ">
+    <div className="bg-black dark:bg-secondary-dark-bg ">
       <div className=" container mx-auto px-2 py-10 text-white flex flex-wrap items-center justify-between gap-10 text-[20px] select-none">
         <div className="space-y-4">
           <h1 className="font-bold text-2xl ">E-Commerce</h1>
