@@ -17,6 +17,7 @@ const config = {
     getAuthUser: "authentication",
     refreshToken: "authentication/refresh-token",
     updateInfo: "authentication",
+    updatePassword: "authentication/update-password",
   },
 };
 

@@ -2,7 +2,6 @@ import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import type { LoginDto } from "../dtos/LoginDto";
-import type { UserDto } from "../dtos/UserDto";
 import { useAppDispatch } from "../redux/hook/reduxHooks";
 import { setAuthUser } from "../redux/slices/authSlice";
 import { setEmail, setOtp } from "../redux/slices/signUpSlice";
@@ -12,12 +11,15 @@ import {
   resetPassword,
   signUp,
   updateInfo,
+  updatePassword,
 } from "../services/authService";
 import { checkOtp, sendOtp } from "../services/otpService";
 import type { UseSendOtpOptions } from "./types/UseSendOtpOptions";
 import type { UseHookOptions } from "./types/UseHookOptions";
 import type ForgetPasswordDto from "../dtos/ForgetPasswordDto";
 import type { SignUpDto } from "../dtos/SignUpDto";
+import type UserDto from "../dtos/UserDto";
+import type { UpdatePasswordDto } from "../dtos/UpdatePasswordDto";
 
 //register
 export function useRegister() {
@@ -120,6 +122,19 @@ export function useUpdateInfo() {
     onSuccess: (data) => {
       dispatch(setAuthUser(data));
       navigate("/");
+    },
+  });
+}
+
+//update password
+export function useUpdatePassword() {
+  const navigate = useNavigate();
+
+  return useMutation<any, AxiosError, UpdatePasswordDto>({
+    mutationKey: ["updatePassword"],
+    mutationFn: updatePassword,
+    onSuccess: () => {
+      navigate("/my-account/profile");
     },
   });
 }

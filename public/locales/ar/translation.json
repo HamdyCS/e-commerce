@@ -66,5 +66,17 @@
   "Edit Profile": "تعديل الملف الشخصي",
   "Update": "تحديث",
   "Update Email": "تحديث البريد الإلكتروني",
-  "Update Password": "تحديث كلمة المرور"
+  "Update Password": "تحديث كلمة المرور",
+  "Old Password": "كلمة المرور القديمة",
+  "New Password": "كلمة المرور الجديدة",
+  "Confirm New Password": "تأكيد كلمة المرور الجديدة",
+  "Current Password": "كلمة المرور الحالية",
+  "Current password is wrong": "كلمة المرور الحالية غير صحيحة",
+  "New password must be at least 6 characters long": "يجب أن تكون كلمة المرور الجديدة 6 أحرف على الأقل",
+  "New password must be at most 10 characters long": "يجب أن تكون كلمة المرور الجديدة 10 أحرف على الأكثر",
+  "New password must contain at least one uppercase letter": "يجب أن تحتوي كلمة المرور الجديدة على حرف كبير واحد على الأقل",
+  "New password must contain at least one lowercase letter": "يجب أن تحتوي كلمة المرور الجديدة على حرف صغير واحد على الأقل",
+  "New password must contain at least one number": "يجب أن تحتوي كلمة المرور الجديدة على رقم واحد على الأقل",
+  "New password must contain at least one special character": "يجب أن تحتوي كلمة المرور الجديدة على رمز خاص واحد على الأقل",
+  "Confirm password is required": "تأكيد كلمة المرور الجديدة مطلوبة"
 }

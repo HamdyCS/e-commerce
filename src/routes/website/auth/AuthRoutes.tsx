@@ -5,6 +5,8 @@ import ForgetPassword from "../../../pages/website/auth/ForgetPassword";
 import AuthLayout from "../../../components/website/layout/AuthLayout";
 import MyAccount from "../../../components/website/auth/MyAccount";
 import Profile from "../../../pages/website/auth/Profile";
+import UpdateEmail from "../../../pages/website/auth/UpdateEmail";
+import UpdatePassword from "../../../pages/website/auth/UpdatePassword";
 
 const AuthRoutes: RouteObject[] = [
   {
@@ -22,6 +24,14 @@ const AuthRoutes: RouteObject[] = [
       {
         path: "forget-password",
         element: <ForgetPassword />,
+      },
+      {
+        path: "update-email",
+        element: <UpdateEmail />,
+      },
+      {
+        path: "update-password",
+        element: <UpdatePassword />,
       },
     ],
   },

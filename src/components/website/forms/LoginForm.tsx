@@ -1,8 +1,6 @@
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFormik } from "formik";
 import { AnimatePresence } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
@@ -10,6 +8,7 @@ import type { LoginDto } from "../../../dtos/LoginDto";
 import { useLogin } from "../../../hooks/auth";
 import Button from "../../ui/Button";
 import FieldError from "../../ui/FieldError";
+import PasswordInput from "../../ui/PasswordInput";
 import LoginByProviders from "../auth/LoginByProviders";
 
 const validationSchema = Yup.object({
@@ -26,7 +25,6 @@ const initialValues: LoginDto = {
 };
 
 export default function LoginForm() {
-  const [showPassword, setShowPassword] = useState(false);
   const focusInput = useRef<HTMLInputElement>(null);
 
   const { t } = useTranslation();
@@ -72,24 +70,14 @@ export default function LoginForm() {
             <FieldError error={formik.errors.email} />
           )}
 
-          <div className="relative">
-            <input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              name="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              placeholder={t("Password")}
-              className="w-full p-2 border-b border-gray-300"
-            />
-            <FontAwesomeIcon
-              cursor={"pointer"}
-              onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-0 top-1/2 -translate-y-1/2 select-none text-blue-500 mr-2"
-              icon={showPassword ? faEye : faEyeSlash}
-            />
-          </div>
+          <PasswordInput
+            id="password"
+            name="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder={t("Password")}
+          />
 
           {formik.touched.password && formik.errors.password && (
             <FieldError error={formik.errors.password} />

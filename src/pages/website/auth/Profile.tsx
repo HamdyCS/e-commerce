@@ -128,13 +128,13 @@ export default function Profile() {
           />
           <div className="flex justify-between flex-wrap">
             <Link
-              to="/auth/update-email"
+              to="/update-email"
               className="text-blue-500 hover:underline cursor-pointer min-h-10"
             >
               {t("Update Email")}
             </Link>
             <Link
-              to="/auth/update-password"
+              to="/update-password"
               className="text-blue-500 hover:underline cursor-pointer min-h-10"
             >
               {t("Update Password")}

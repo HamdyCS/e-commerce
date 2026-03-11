@@ -1,8 +1,6 @@
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFormik } from "formik";
 import { AnimatePresence } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
@@ -12,6 +10,7 @@ import { useAppSelector } from "../../../redux/hook/reduxHooks";
 import Button from "../../ui/Button";
 import FieldError from "../../ui/FieldError";
 import Input from "../../ui/Input";
+import PasswordInput from "../../ui/PasswordInput";
 
 const validationSchema = Yup.object({
   firstName: Yup.string().required("First Name is required"),
@@ -67,9 +66,6 @@ interface SignUpFormProps {
 
 export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
   const { email, otp } = useAppSelector((state) => state.otp);
-
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const focusInput = useRef<HTMLInputElement>(null);
 
@@ -169,44 +165,28 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
             {t("Change Email")}
           </button>
 
-          <div className="relative">
-            <Input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              name="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              placeholder={t("Password")}
-            />
-            <FontAwesomeIcon
-              cursor={"pointer"}
-              onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-0 top-1/2 -translate-y-1/2 select-none text-blue-500 mr-2"
-              icon={showPassword ? faEye : faEyeSlash}
-            />
-          </div>
+          <PasswordInput
+            id="password"
+            name="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder={t("Password")}
+          />
+
           {formik.touched.password && formik.errors.password && (
             <FieldError error={formik.errors.password} />
           )}
 
-          <div className="relative">
-            <Input
-              id="confirm-password"
-              type={showConfirmPassword ? "text" : "password"}
-              name="confirmPassword"
-              value={formik.values.confirmPassword}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              placeholder={t("Confirm Password")}
-            />
-            <FontAwesomeIcon
-              cursor={"pointer"}
-              onClick={() => setShowConfirmPassword((prev) => !prev)}
-              className="absolute right-0 top-1/2 -translate-y-1/2 select-none text-blue-500 mr-2"
-              icon={showPassword ? faEye : faEyeSlash}
-            />
-          </div>
+          <PasswordInput
+            id="confirm-password"
+            name="confirmPassword"
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder={t("Confirm Password")}
+          />
+
           {formik.touched.confirmPassword && formik.errors.confirmPassword && (
             <FieldError error={formik.errors.confirmPassword} />
           )}
