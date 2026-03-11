@@ -14,7 +14,7 @@ export default function AuthLayout() {
         alt={t("signup")}
         className="w-1/2 h-150 hidden lg:block self-center"
       />
-      <div className="lg:w-1/2 w-full flex items-center justify-center">
+      <div className="lg:w-1/2 w-full flex items-center justify-center p-5">
         <div className="w-full max-w-110">
           <Outlet />
         </div>

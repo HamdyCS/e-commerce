@@ -73,7 +73,7 @@ export default function CheckOtp({ onContinue }: CheckOtpProps) {
   return (
     <div className="space-y-4 w-full max-w-100 p-5">
       <h2 className="text-[36px]">{t("Check OTP")}</h2>
-      <form onSubmit={handelSubmit} className="space-y-4 " ref={formRef}>
+      <form onSubmit={handelSubmit} className="space-y-7 " ref={formRef}>
         <div className="flex gap-2 items-center justify-between">
           {inputElements}
         </div>

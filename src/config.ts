@@ -18,6 +18,7 @@ const config = {
     refreshToken: "authentication/refresh-token",
     updateInfo: "authentication",
     updatePassword: "authentication/update-password",
+    updateEmail: "authentication/update-email",
   },
 };
 

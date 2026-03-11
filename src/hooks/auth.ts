@@ -1,25 +1,27 @@
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import type ForgetPasswordDto from "../dtos/ForgetPasswordDto";
 import type { LoginDto } from "../dtos/LoginDto";
+import type { SignUpDto } from "../dtos/SignUpDto";
+import type UpdateEmailDto from "../dtos/UpdateEmailDto";
+import type { UpdatePasswordDto } from "../dtos/UpdatePasswordDto";
+import type UserDto from "../dtos/UserDto";
 import { useAppDispatch } from "../redux/hook/reduxHooks";
-import { setAuthUser } from "../redux/slices/authSlice";
+import { setAuthUser, setAuthUserEmail } from "../redux/slices/authSlice";
 import { setEmail, setOtp } from "../redux/slices/signUpSlice";
 import {
   isEmailExist,
   login,
   resetPassword,
   signUp,
+  updateEmail,
   updateInfo,
   updatePassword,
 } from "../services/authService";
 import { checkOtp, sendOtp } from "../services/otpService";
-import type { UseSendOtpOptions } from "./types/UseSendOtpOptions";
 import type { UseHookOptions } from "./types/UseHookOptions";
-import type ForgetPasswordDto from "../dtos/ForgetPasswordDto";
-import type { SignUpDto } from "../dtos/SignUpDto";
-import type UserDto from "../dtos/UserDto";
-import type { UpdatePasswordDto } from "../dtos/UpdatePasswordDto";
+import type { UseSendOtpOptions } from "./types/UseSendOtpOptions";
 
 //register
 export function useRegister() {
@@ -76,7 +78,7 @@ export function useSendOtp({ type, onSuccess }: UseSendOtpOptions) {
     mutationFn: async (email: string) => {
       const isExist = await isEmailExist(email);
 
-      if (isExist && type === "signUp") {
+      if (isExist && (type === "signUp" || type === "updateEmail")) {
         throw new Error("Email already exists");
       } else if (!isExist && type === "forgetPassword") {
         throw new Error("Email not exists");
@@ -134,6 +136,29 @@ export function useUpdatePassword() {
     mutationKey: ["updatePassword"],
     mutationFn: updatePassword,
     onSuccess: () => {
+      navigate("/my-account/profile");
+    },
+  });
+}
+
+//update email
+export function useUpdateEmail({ onError, onSuccess }: UseHookOptions<any>) {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  return useMutation<string, AxiosError, UpdateEmailDto>({
+    mutationKey: ["updateEmail"],
+    mutationFn: async (data: UpdateEmailDto) => {
+      await updateEmail(data);
+      return data.email;
+    },
+    onSuccess: (email) => {
+      dispatch(setAuthUserEmail(email));
+      onSuccess?.(null);
+      navigate("/my-account/profile");
+    },
+    onError: (error) => {
+      onError?.(error);
       navigate("/my-account/profile");
     },
   });

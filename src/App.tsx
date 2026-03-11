@@ -8,10 +8,11 @@ import DashboardRoutes from "./routes/dashboard/DashboardRoutes";
 import WebsiteRoutes from "./routes/website/WebsiteRoutes";
 import AuthProvider from "./components/website/auth/AuthProvider";
 import { useAppSelector } from "./redux/hook/reduxHooks";
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
   const { i18n } = useTranslation();
-  const { theme } = useAppSelector((state) => state.theme);
+  const { theme, isDarkTheme } = useAppSelector((state) => state.theme);
 
   useEffect(() => {
     document.documentElement.dir = i18n.dir();
@@ -36,7 +37,18 @@ export default function App() {
 
   return (
     <AuthProvider>
-      <div className="dark:bg-primary-dark-bg! text-primary-text-dark! dark:text-primary-text-light!">
+      <Toaster
+        toastOptions={{
+          style: {
+            fontSize: "16px",
+            backgroundColor: isDarkTheme ? "#1e0021" : "white",
+            color: isDarkTheme ? "#ffffff" : "black",
+          },
+        }}
+        position="top-center"
+        reverseOrder={true}
+      />
+      <div className="dark:bg-primary-dark-bg! text-primary-text-dark! dark:text-primary-text-light! ">
         {routes}
       </div>
     </AuthProvider>

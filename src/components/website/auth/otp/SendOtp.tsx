@@ -12,7 +12,7 @@ import LoginByProviders from "../LoginByProviders";
 
 interface SendOtpProps {
   afterSend: () => void;
-  type: "signUp" | "forgetPassword";
+  type: "signUp" | "forgetPassword" | "updateEmail";
 }
 
 const initialValues = {
@@ -32,7 +32,7 @@ export default function SendOtp({ afterSend, type }: SendOtpProps) {
     onSubmit: (values) => mutate(values.email),
   });
 
-  const { mutate, isPending, isError, error } = useSendOtp({
+  const { mutate, isPending, isError } = useSendOtp({
     type,
     onSuccess: afterSend,
   });
@@ -45,10 +45,10 @@ export default function SendOtp({ afterSend, type }: SendOtpProps) {
   }, []);
 
   return (
-    <div className="  space-y-4 w-full max-w-100 p-5 rounded-md overflow-hidden">
+    <div className="  space-y-7 w-full max-w-100 p-5 rounded-md overflow-hidden">
       <h2 className="text-[36px]">{t("Send OTP")}</h2>
       <AnimatePresence>
-        <form onSubmit={formik.handleSubmit} className="space-y-4">
+        <form onSubmit={formik.handleSubmit} className="space-y-7">
           <Input
             type="text"
             name="email"
@@ -62,7 +62,7 @@ export default function SendOtp({ afterSend, type }: SendOtpProps) {
           {formik.touched.email && formik.errors.email && (
             <FieldError error={formik.errors.email} />
           )}
-          {isError && <FieldError error={error?.message} />}
+          {isError && <FieldError error={t("Something went wrong")} />}
           <div className="flex flex-col gap-4">
             <Button
               className=" relative bg-blue-500 text-white p-2 rounded-md cursor-pointer block min-h-10"
@@ -75,14 +75,17 @@ export default function SendOtp({ afterSend, type }: SendOtpProps) {
         </form>
       </AnimatePresence>
 
-      <LoginByProviders />
-
-      <p className="text-center">
-        {t("Already have an account?")}
-        <Link to="/login" className="font-bold ml-2">
-          {t("Login")}
-        </Link>
-      </p>
+      {type !== "updateEmail" && (
+        <>
+          <LoginByProviders />
+          <p className="text-center">
+            {t("Already have an account?")}
+            <Link to="/login" className="font-bold ml-2">
+              {t("Login")}
+            </Link>
+          </p>
+        </>
+      )}
     </div>
   );
 }

@@ -66,7 +66,7 @@ export default function UpdatePassword() {
       <div className="  space-y-4 w-full max-w-100 p-5 rounded-md overflow-hidden">
         <h2 className="text-[36px]">{t("Reset Password")}</h2>
         <AnimatePresence>
-          <form onSubmit={formik.handleSubmit} className="space-y-4">
+          <form onSubmit={formik.handleSubmit} className="space-y-7">
             <PasswordInput
               id="oldPassword"
               name="oldPassword"

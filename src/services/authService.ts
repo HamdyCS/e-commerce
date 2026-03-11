@@ -6,6 +6,7 @@ import type ForgetPasswordDto from "../dtos/ForgetPasswordDto";
 import type UserDto from "../dtos/UserDto";
 import type UpdateInfoDto from "../dtos/UpdateInfoDto";
 import type { UpdatePasswordDto } from "../dtos/UpdatePasswordDto";
+import type UpdateEmailDto from "../dtos/UpdateEmailDto";
 
 export const isEmailExist = async (email: string) => {
   const response = await Axios.get<boolean>(
@@ -49,5 +50,10 @@ export const updatePassword = async (data: UpdatePasswordDto) => {
     `${config.auth.updatePassword}`,
     data,
   );
+  return response.data;
+};
+
+export const updateEmail = async (data: UpdateEmailDto) => {
+  const response = await Axios.put<UserDto>(`${config.auth.updateEmail}`, data);
   return response.data;
 };
