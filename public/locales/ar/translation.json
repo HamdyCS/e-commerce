@@ -80,5 +80,7 @@
   "New password must contain at least one special character": "يجب أن تحتوي كلمة المرور الجديدة على رمز خاص واحد على الأقل",
   "Confirm password is required": "تأكيد كلمة المرور الجديدة مطلوبة",
   "Updated Email successfuly": "تم تحديث الايميل بنجاح",
-  "An error occurred while updating the email": "حدث خطا اثناء تحديث الاميل"
+  "An error occurred while updating the email": "حدث خطا اثناء تحديث الاميل",
+  "Updated Password successfuly": "تم تحديث كلمة المرور بنجاح",
+  "An error occurred while updating the password": "حدث خطا اثناء تحديث كلمة المرور"
 }

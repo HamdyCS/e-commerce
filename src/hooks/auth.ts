@@ -22,6 +22,8 @@ import {
 import { checkOtp, sendOtp } from "../services/otpService";
 import type { UseHookOptions } from "./types/UseHookOptions";
 import type { UseSendOtpOptions } from "./types/UseSendOtpOptions";
+import toast from "react-hot-toast";
+import { t } from "i18next";
 
 //register
 export function useRegister() {
@@ -136,13 +138,18 @@ export function useUpdatePassword() {
     mutationKey: ["updatePassword"],
     mutationFn: updatePassword,
     onSuccess: () => {
+      toast.success(t("Updated Password successfuly"));
+      navigate("/my-account/profile");
+    },
+    onError: () => {
+      toast.error(t("An error occurred while updating the password"));
       navigate("/my-account/profile");
     },
   });
 }
 
 //update email
-export function useUpdateEmail({ onError, onSuccess }: UseHookOptions<any>) {
+export function useUpdateEmail() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -154,11 +161,11 @@ export function useUpdateEmail({ onError, onSuccess }: UseHookOptions<any>) {
     },
     onSuccess: (email) => {
       dispatch(setAuthUserEmail(email));
-      onSuccess?.(null);
+      toast.success(t("Updated Email successfuly"));
       navigate("/my-account/profile");
     },
-    onError: (error) => {
-      onError?.(error);
+    onError: () => {
+      toast.error(t("An error occurred while updating the email"));
       navigate("/my-account/profile");
     },
   });

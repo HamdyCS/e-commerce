@@ -2,6 +2,7 @@ import type { RouteObject } from "react-router-dom";
 import Home from "../../pages/website/Home";
 import AuthRoutes from "./auth/AuthRoutes";
 import NotFound from "../../pages/errors/NotFound";
+import AccountRoutes from "./account/AccountRoutes";
 
 const WebsiteRoutes: RouteObject[] = [
   {
@@ -26,6 +27,7 @@ const WebsiteRoutes: RouteObject[] = [
   },
 
   ...AuthRoutes,
+  ...AccountRoutes,
 ];
 
 export default WebsiteRoutes;

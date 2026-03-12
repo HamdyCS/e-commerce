@@ -7,19 +7,12 @@ import type UpdateEmailDto from "../../../dtos/UpdateEmailDto";
 import { useUpdateEmail } from "../../../hooks/auth";
 import { useAppSelector } from "../../../redux/hook/reduxHooks";
 
-import toast from "react-hot-toast";
-import { useTranslation } from "react-i18next";
 import Spinner from "../../../components/loading/Spinner";
 
 export default function UpdateEmail() {
   //1- send otp, 2- check otp, 3- update email
   const [step, setStep] = useState(1);
-  const { t } = useTranslation();
-
-  const { mutate, isPending } = useUpdateEmail({
-    onSuccess: () => toast.success(t("Updated Email successfuly")),
-    onError: () => toast.error(t("An error occurred while updating the email")),
-  });
+  const { mutate, isPending } = useUpdateEmail();
 
   const { otp, email } = useAppSelector((state) => state.otp);
 

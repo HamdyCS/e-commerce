@@ -8,4 +8,5 @@
   --color-primary-text-light: white;
 }
 
+/* لكي تعمل في dark: */
 @custom-variant dark (&:where(.dark, .dark *));
