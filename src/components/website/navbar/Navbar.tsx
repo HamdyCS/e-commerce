@@ -72,7 +72,7 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-      <div className="border-b border-b-black/10 dark:border-b-white/10">
+      <div className="border-b border-b-black/20 dark:border-b-white/20">
         <div className="container mx-auto px-2 py-5 flex items-center justify-between gap-5 flex-wrap">
           <NavLink
             to="/"

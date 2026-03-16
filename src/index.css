@@ -6,7 +6,17 @@
   --color-primary-card-dark-bg: #2c466e;
   --color-primary-text-dark: black;
   --color-primary-text-light: white;
+  --color-hover: var(--color-blue-500);
 }
 
 /* لكي تعمل في dark: */
 @custom-variant dark (&:where(.dark, .dark *));
+
+.swiper-pagination-bullet {
+  width: 15px !important;
+  height: 15px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--color-blue-500) !important;
+}

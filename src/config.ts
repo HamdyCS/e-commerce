@@ -20,6 +20,12 @@ const config = {
     updatePassword: "authentication/update-password",
     updateEmail: "authentication/update-email",
   },
+  category: {
+    getAll: "product-categories/all-paged",
+  },
+  banner: {
+    getAllActive: "banners/all/active",
+  },
 };
 
 export default config;

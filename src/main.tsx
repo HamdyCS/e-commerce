@@ -8,6 +8,10 @@ import "./i18n";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
 import { store } from "./redux/store/store.ts";
+import "react-loading-skeleton/dist/skeleton.css";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const queryClient = new QueryClient();
 

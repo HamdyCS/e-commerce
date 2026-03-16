@@ -20,7 +20,7 @@ export default function MyAccountSidebar() {
               end
               to="/my-account/profile"
               className={(x) =>
-                `${x.isActive && "text-blue-500"} hover:text-blue-500`
+                `${x.isActive && "text-blue-500"} hover:text-hover`
               }
             >
               {t("Profile")}

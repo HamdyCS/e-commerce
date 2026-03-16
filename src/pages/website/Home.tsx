@@ -1,5 +1,7 @@
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { useTranslation } from "react-i18next";
+import CategoriesList from "../../components/website/categories/CategoriesList";
+import BannersSwiper from "../../components/website/banner/BannersSwiper";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -15,7 +17,14 @@ export default function Home() {
         />
         <meta name="keywords" content="home, e-commerce" />
       </Helmet>
-      {t("Home")}
+      <div className="flex  gap-10">
+        <div className="hidden lg:block">
+          <CategoriesList number={1} />
+        </div>
+        <div className="min-w-0 grow">
+          <BannersSwiper />
+        </div>
+      </div>
     </div>
   );
 }
