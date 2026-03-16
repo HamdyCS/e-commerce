@@ -128,7 +128,7 @@ export default function Navbar() {
             )}
           </div>
           <div className="flex items-center justify-between  grow lg:grow-0  gap-2">
-            <div className="flex gap-2 items-center bg-[#F5F5F5] dark:bg-transparent px-2 text-[12px] focus-within:border-b">
+            <div className="flex gap-2 items-center bg-card-light dark:bg-card-dark px-2 text-[12px] focus-within:border-b">
               <input
                 type="text"
                 className="grow outline-0 min-w-50"

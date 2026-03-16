@@ -5,14 +5,18 @@ import { Link } from "react-router-dom";
 import CustomSkeletonTheme from "../../ui/CustomSkeletonTheme";
 import Skeleton from "react-loading-skeleton";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../../redux/hook/reduxHooks";
+import authImageLightMode from "../../../assets/images/authImageLightMode.png";
+import authImageDarkMode from "../../../assets/images/authImageDarkMode.png";
 
 export default function BannersSwiper() {
   const { data, isLoading } = useGetAllActiveBanners();
+  const { isDarkTheme } = useAppSelector((state) => state.theme);
 
   const { i18n } = useTranslation();
 
   const skeletonElement = (
-    <>
+    <div className="relative">
       <Skeleton className="h-70!" />
       <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center justify-center gap-2">
         <Skeleton
@@ -31,7 +35,7 @@ export default function BannersSwiper() {
           className="rounded-full! border-2 border-black/10 dark:border-white/10"
         />
       </div>
-    </>
+    </div>
   );
 
   return (
@@ -63,6 +67,15 @@ export default function BannersSwiper() {
             </SwiperSlide>
           ))}
         </Swiper>
+      )}
+      {!isLoading && data?.length === 0 && (
+        <div className="w-full">
+          <img
+            src={isDarkTheme ? authImageDarkMode : authImageLightMode}
+            alt="banner"
+            className="w-full h-50 lg:h-100 bg-fill  bg-no-repeat bg-center"
+          />
+        </div>
       )}
     </div>
   );

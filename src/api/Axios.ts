@@ -5,6 +5,7 @@ import { refreshToken } from "../services/authService";
 export const Axios = axios.create({
   baseURL: config.baseUrl,
   withCredentials: true,
+  timeout: 10000,
 });
 
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
@@ -37,6 +38,7 @@ Axios.interceptors.response.use(
   async (error: AxiosError) => {
     //get original request
     const originalRequest = error.config as CustomAxiosRequestConfig;
+
 
     //if not 401 or no request or request is already retried or request is refresh token
     if (

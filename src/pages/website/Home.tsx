@@ -1,12 +1,13 @@
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { useTranslation } from "react-i18next";
 import CategoriesList from "../../components/website/categories/CategoriesList";
-import BannersSwiper from "../../components/website/banner/BannersSwiper";
+import BannersSwiper from "../../components/website/swiper/BannersSwiper";
+import CategorySwiper from "../../components/website/swiper/CategorySwiper";
 
 export default function Home() {
   const { t } = useTranslation();
   return (
-    <div>
+    <div className="space-y-20">
       <Helmet>
         <title>{t("Home")}</title>
         <meta
@@ -25,6 +26,7 @@ export default function Home() {
           <BannersSwiper />
         </div>
       </div>
+      <CategorySwiper />
     </div>
   );
 }

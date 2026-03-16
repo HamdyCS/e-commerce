@@ -7,6 +7,8 @@
   --color-primary-text-dark: black;
   --color-primary-text-light: white;
   --color-hover: var(--color-blue-500);
+  --color-card-light: #f5f5f5;
+  --color-card-dark: tansparent;
 }
 
 /* لكي تعمل في dark: */
