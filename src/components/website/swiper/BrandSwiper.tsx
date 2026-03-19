@@ -5,13 +5,13 @@ import Skeleton from "react-loading-skeleton";
 import { Link } from "react-router-dom";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useGetAllCategories } from "../../../hooks/category";
+import { useGetAllBrands } from "../../../hooks/brand";
 import CustomSkeletonTheme from "../../ui/CustomSkeletonTheme";
 import SectionHeader from "../../ui/SectionHeader";
 import logo from "../../../assets/logo.png";
 
-export default function CategorySwiper() {
-  const { data, isLoading } = useGetAllCategories({
+export default function BrandSwiper() {
+  const { data, isLoading } = useGetAllBrands({
     pageNumber: 1,
     pageSize: 100,
   });
@@ -23,10 +23,10 @@ export default function CategorySwiper() {
   ));
 
   return (
-    <div className="">
-      <SectionHeader title={t("Categories")} />
+    <div className="overflow-hidden">
+      <SectionHeader title={t("Brands")} />
       <div className="mt-5 flex items-center justify-between">
-        <h2 className="text-bold text-[36px]">{t("Browse By Category")}</h2>
+        <h2 className="text-bold text-[36px]">{t("Browse By Brand")}</h2>
         {!isLoading && (
           <div className="custom-controller flex items-center gap-3">
             <button
@@ -83,20 +83,18 @@ export default function CategorySwiper() {
           }}
           speed={1000} // سرعة التحريك
         >
-          {data?.map((category) => (
-            <SwiperSlide key={category.id}>
+          {data?.map((brand) => (
+            <SwiperSlide key={brand.id}>
               <Link
-                to={`/category/${category.id}`}
+                to={`/brand/${brand.id}`}
                 className="bg-card-light dark:bg-card-dark border rounded-sm p-5 flex flex-col gap-5 items-center hover:scale-110 transition-all duration-300  border-black/20 dark:border-white/20"
               >
                 <img
                   className="w-30 h-30 object-contain"
-                  src={category.images[0]?.url || logo}
-                  alt={category.nameEn}
+                  src={brand.image.url || logo}
+                  alt={brand.nameEn}
                 />
-                <p>
-                  {i18n.language === "ar" ? category.nameAr : category.nameEn}
-                </p>
+                <p>{i18n.language === "ar" ? brand.nameAr : brand.nameEn}</p>
               </Link>
             </SwiperSlide>
           ))}

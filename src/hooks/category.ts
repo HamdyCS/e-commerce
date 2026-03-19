@@ -1,14 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllCategories } from "../services/categoryService";
-import type PaginationOptions from "./types/PaginationOptions";
 import type CategoryDto from "../dtos/CategoryDto";
+import { getAllCategories } from "../services/categoryService";
+import type PaginationType from "../types/PaginationType";
 
-export function useGetAllCategories({
-  pageNumber,
-  pageSize,
-}: PaginationOptions) {
+export function useGetAllCategories({ pageNumber, pageSize }: PaginationType) {
   return useQuery<CategoryDto[]>({
-    queryKey: ["categories"],
-    queryFn: () => getAllCategories(pageNumber, pageSize),
+    //مع اي تغيير في القيم سيتم اعادة احضار البيانات
+    queryKey: ["categories", pageNumber, pageSize],
+    queryFn: () => getAllCategories({ pageNumber, pageSize }),
   });
 }

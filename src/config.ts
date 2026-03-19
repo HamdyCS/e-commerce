@@ -23,6 +23,9 @@ const config = {
   category: {
     getAll: "product-categories/all-paged",
   },
+  brand: {
+    getAll: "brands/all-paged",
+  },
   banner: {
     getAllActive: "banners/all/active",
   },

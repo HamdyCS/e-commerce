@@ -9,7 +9,7 @@ import { useAppSelector } from "../../../redux/hook/reduxHooks";
 import authImageLightMode from "../../../assets/images/authImageLightMode.png";
 import authImageDarkMode from "../../../assets/images/authImageDarkMode.png";
 
-export default function BannersSwiper() {
+export default function BannerSwiper() {
   const { data, isLoading } = useGetAllActiveBanners();
   const { isDarkTheme } = useAppSelector((state) => state.theme);
 

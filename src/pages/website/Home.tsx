@@ -1,8 +1,10 @@
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { useTranslation } from "react-i18next";
 import CategoriesList from "../../components/website/categories/CategoriesList";
-import BannersSwiper from "../../components/website/swiper/BannersSwiper";
+import Features from "../../components/website/Features";
+import BannerSwiper from "../../components/website/swiper/BannerSwiper";
 import CategorySwiper from "../../components/website/swiper/CategorySwiper";
+import BrandSwiper from "../../components/website/swiper/BrandSwiper";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -23,10 +25,21 @@ export default function Home() {
           <CategoriesList number={1} />
         </div>
         <div className="min-w-0 grow">
-          <BannersSwiper />
+          <BannerSwiper />
         </div>
       </div>
-      <CategorySwiper />
+      <div>
+        <CategorySwiper />
+        <div className="border-b mt-9 border-b-black/20 dark:border-b-white/20" />
+      </div>
+      <div>
+        <Features />
+        <div className="border-b mt-9 border-b-black/20 dark:border-b-white/20" />
+      </div>
+      <div>
+        <BrandSwiper />
+        <div className="border-b mt-9 border-b-black/20 dark:border-b-white/20" />
+      </div>
     </div>
   );
 }
