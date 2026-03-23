@@ -29,6 +29,9 @@ const config = {
   banner: {
     getAllActive: "banners/all/active",
   },
+  sellerProduct: {
+    getAll: "seller-products/all",
+  },
 };
 
 export default config;

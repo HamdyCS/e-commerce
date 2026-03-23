@@ -9,6 +9,8 @@
   --color-hover: var(--color-blue-500);
   --color-card-light: #f5f5f5;
   --color-card-dark: tansparent;
+
+  --spacing-min-card: 280px;
 }
 
 /* لكي تعمل في dark: */

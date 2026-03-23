@@ -7,4 +7,4 @@ export function useGetAllActiveBanners() {
     queryKey: ["active-banners"],
     queryFn: getAllActiveBanners,
   });
-}
+} 

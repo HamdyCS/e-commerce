@@ -73,13 +73,13 @@ export default function CategorySwiper() {
           spaceBetween={20}
           breakpoints={{
             // Mobile Horizontal / Tablets
-            480: { slidesPerView: 2, spaceBetween: 15 },
+            480: { slidesPerView: 1, spaceBetween: 20 },
             // Tablets / Laptops
-            768: { slidesPerView: 3, spaceBetween: 20 },
+            768: { slidesPerView: 2, spaceBetween: 20 },
             // Desktop
-            1024: { slidesPerView: 4, spaceBetween: 20 },
+            1024: { slidesPerView: 3, spaceBetween: 20 },
             // Large Desktop
-            1280: { slidesPerView: 5, spaceBetween: 25 },
+            1280: { slidesPerView: 4, spaceBetween: 20 },
           }}
           speed={1000} // سرعة التحريك
         >
@@ -87,7 +87,7 @@ export default function CategorySwiper() {
             <SwiperSlide key={category.id}>
               <Link
                 to={`/category/${category.id}`}
-                className="bg-card-light dark:bg-card-dark border rounded-sm p-5 flex flex-col gap-5 items-center hover:scale-110 transition-all duration-300  border-black/20 dark:border-white/20"
+                className="bg-card-light dark:bg-card-dark border rounded-sm p-5 flex flex-col gap-5 items-center hover:scale-110 transition-all duration-300  border-black/20 dark:border-white/20 min-w-min-card"
               >
                 <img
                   className="w-30 h-30 object-contain"

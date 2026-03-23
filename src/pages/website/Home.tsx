@@ -1,12 +1,22 @@
 import { Helmet } from "@dr.pogodin/react-helmet";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import CategoriesList from "../../components/website/categories/CategoriesList";
 import Features from "../../components/website/Features";
+import SellerProducts from "../../components/website/sellerProducts/SellerProducts";
 import BannerSwiper from "../../components/website/swiper/BannerSwiper";
-import CategorySwiper from "../../components/website/swiper/CategorySwiper";
 import BrandSwiper from "../../components/website/swiper/BrandSwiper";
+import CategorySwiper from "../../components/website/swiper/CategorySwiper";
+import { useGetAllSellerProducts } from "../../hooks/sellerProduct";
 
 export default function Home() {
+  const { data, isFetchingNextPage, fetchNextPage, hasNextPage } =
+    useGetAllSellerProducts(6);
+
+  const sellerProducts = useMemo(() => {
+    return data?.pages.flatMap((s) => s.data);
+  }, [data]);
+
   const { t } = useTranslation();
   return (
     <div className="space-y-20">
@@ -39,6 +49,14 @@ export default function Home() {
       <div>
         <BrandSwiper />
         <div className="border-b mt-9 border-b-black/20 dark:border-b-white/20" />
+      </div>
+      <div>
+        <SellerProducts
+          data={sellerProducts}
+          handleFetchNextPage={fetchNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          hasNextPage={hasNextPage}
+        />
       </div>
     </div>
   );
