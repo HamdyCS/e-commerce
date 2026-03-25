@@ -86,7 +86,7 @@ export default function CategorySwiper() {
           {data?.map((category) => (
             <SwiperSlide key={category.id}>
               <Link
-                to={`/category/${category.id}`}
+                to={`/categories/${category.id}`}
                 className="bg-card-light dark:bg-card-dark border rounded-sm p-5 flex flex-col gap-5 items-center hover:scale-110 transition-all duration-300  border-black/20 dark:border-white/20 min-w-min-card"
               >
                 <img

@@ -86,7 +86,7 @@ export default function BrandSwiper() {
           {data?.map((brand) => (
             <SwiperSlide key={brand.id}>
               <Link
-                to={`/brand/${brand.id}`}
+                to={`/brands/${brand.id}`}
                 className="bg-card-light dark:bg-card-dark border rounded-sm p-5 flex flex-col gap-5 items-center hover:scale-110 transition-all duration-300  border-black/20 dark:border-white/20 min-w-min-card"
               >
                 <img

@@ -1,6 +1,5 @@
-import React from "react";
 import type { RouteObject } from "react-router-dom";
-import SellerProduct from "../../../components/website/sellerProducts/SellerProduct";
+import SellerProduct from "../../../pages/website/sellerProducts/SellerProduct";
 
 const ProductRoutes: RouteObject[] = [
   {

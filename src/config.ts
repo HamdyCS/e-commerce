@@ -33,6 +33,8 @@ const config = {
     getAll: "seller-products",
     getById: "seller-products",
     getBySubCategoryId: "seller-products/sub-categories",
+    getByCategoryId: "seller-products/categories",
+    getByBrandId: "seller-products/brands",
   },
 };
 

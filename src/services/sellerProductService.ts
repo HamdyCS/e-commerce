@@ -33,3 +33,29 @@ export async function getSellerProductsBySubCategoryId({
   );
   return response.data;
 }
+
+export async function getSellerProductsByCategoryId({
+  categoryId,
+  pagination: { pageNumber, pageSize },
+}: {
+  categoryId: number;
+  pagination: PaginationType;
+}) {
+  const response = await Axios.get<PaginationDto<SellerProductDto>>(
+    `${config.sellerProduct.getByCategoryId}/${categoryId}?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+  );
+  return response.data;
+}
+
+export async function getSellerProductsByBrandId({
+  brandId,
+  pagination: { pageNumber, pageSize },
+}: {
+  brandId: number;
+  pagination: PaginationType;
+}) {
+  const response = await Axios.get<PaginationDto<SellerProductDto>>(
+    `${config.sellerProduct.getByBrandId}/${brandId}?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+  );
+  return response.data;
+}

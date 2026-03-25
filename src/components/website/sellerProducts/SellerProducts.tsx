@@ -26,12 +26,12 @@ export default function SellerProducts({
   //fetch next page when inView and hasNextPage and not fetchingNextPage
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) handleFetchNextPage();
-  }, [inView, isFetchingNextPage]);
+  }, [inView, isFetchingNextPage, hasNextPage, handleFetchNextPage]);
 
   //skeleton
   const skeletonElements = Array.from({ length: 4 }).map((_, index) => (
-    <div className="w-full">
-      <Skeleton key={index} className="w-full" height={200} />
+    <div className="w-full" key={index}>
+      <Skeleton className="w-full" height={200} />
     </div>
   ));
 

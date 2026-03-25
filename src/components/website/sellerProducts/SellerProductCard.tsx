@@ -11,12 +11,12 @@ export default function SellerProductCard({
   sellerProduct,
 }: SellerProductCardProps) {
   const { i18n } = useTranslation();
-  const firstImage = sellerProduct.product.images?.[0]?.url ?? logo;
+  const firstImage = sellerProduct.product.images?.[0]?.url;
   return (
     <div className="p-5 min-w-min-card product-card text-wrap bg-card-light dark:bg-card-dark border border-black/20 dark:border-white/20 relative rounded-sm group overflow-hidden">
       <Link to={`/seller-product/${sellerProduct.id}`} className="space-y-5">
         <div className="flex justify-center items-center ">
-          <img className="w-30 h-30 object-contain" src={firstImage} />
+          <img className="w-30 h-30 object-contain" src={firstImage || logo} />
         </div>
         <div className="space-y-2 mb-6">
           <p className="font-bold">

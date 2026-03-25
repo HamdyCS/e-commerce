@@ -4,12 +4,12 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import Counter from "../../ui/Counter";
-import Button from "../../ui/Button";
+import Counter from "../../../components/ui/Counter";
+import Button from "../../../components/ui/Button";
 import logo from "../../../assets/logo.png";
 import Skeleton from "react-loading-skeleton";
-import CustomSkeletonTheme from "../../ui/CustomSkeletonTheme";
-import RelatedProductSwiper from "../swiper/RelatedProductSwiper";
+import CustomSkeletonTheme from "../../../components/ui/CustomSkeletonTheme";
+import RelatedProductSwiper from "../../../components/website/swiper/RelatedProductSwiper";
 
 // const fakeImages = [
 //   "https://www.citypng.com/public/uploads/preview/white-ps5-controller-design-gaming-side-view-701751695142713jvjd9h0kfr.png",

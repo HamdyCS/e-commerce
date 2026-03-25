@@ -30,7 +30,7 @@ export default function CategoriesList({ number }: CategoriesListProps) {
           data?.map((category) => (
             <li key={category.id} className="mb-5">
               <Link
-                to={`/category/${category.id}`}
+                to={`/categories/${category.id}`}
                 className="hover:text-hover"
               >
                 {i18n.language === "ar" ? category.nameAr : category.nameEn}

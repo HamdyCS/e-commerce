@@ -2,14 +2,12 @@ import { faLeftLong, faRightLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
-import { Link } from "react-router-dom";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import { useGetSellerProductsBySubCategoryId } from "../../../hooks/sellerProduct";
 import CustomSkeletonTheme from "../../ui/CustomSkeletonTheme";
 import SectionHeader from "../../ui/SectionHeader";
-import logo from "../../../assets/logo.png";
-import { useGetSellerProductsBySubCategoryId } from "../../../hooks/sellerProduct";
 import SellerProductCard from "../sellerProducts/SellerProductCard";
 
 interface RelatedSellerProductSwiperProps {
