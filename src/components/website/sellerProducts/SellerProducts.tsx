@@ -36,13 +36,17 @@ export default function SellerProducts({
   ));
 
   return (
-    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 px-5">
-      {data?.map((sellerProduct) => (
-        <SellerProductCard
-          key={sellerProduct.id}
-          sellerProduct={sellerProduct}
-        />
-      ))}
+    <div>
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 px-5">
+        {data?.map((sellerProduct) => (
+          <SellerProductCard
+            key={sellerProduct.id}
+            sellerProduct={sellerProduct}
+          />
+        ))}
+        <div className="h-5" ref={ref}></div>
+      </div>
+
       {isFetchingNextPage && (
         <CustomSkeletonTheme>
           <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 px-5">
@@ -50,7 +54,6 @@ export default function SellerProducts({
           </div>
         </CustomSkeletonTheme>
       )}
-      <div className="h-5" ref={ref}></div>
     </div>
   );
 }

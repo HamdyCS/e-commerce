@@ -13,4 +13,6 @@ export interface ProductDto {
   productSubCategoryId: number;
   brandId: number;
   images: ImageDto[];
+  ratingCount: number;
+  avgRating: number;
 }

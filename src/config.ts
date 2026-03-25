@@ -30,7 +30,9 @@ const config = {
     getAllActive: "banners/all/active",
   },
   sellerProduct: {
-    getAll: "seller-products/all",
+    getAll: "seller-products",
+    getById: "seller-products",
+    getBySubCategoryId: "seller-products/sub-categories",
   },
 };
 

@@ -11,7 +11,7 @@ import { useGetAllSellerProducts } from "../../hooks/sellerProduct";
 
 export default function Home() {
   const { data, isFetchingNextPage, fetchNextPage, hasNextPage } =
-    useGetAllSellerProducts(6);
+    useGetAllSellerProducts(10);
 
   const sellerProducts = useMemo(() => {
     return data?.pages.flatMap((s) => s.data);

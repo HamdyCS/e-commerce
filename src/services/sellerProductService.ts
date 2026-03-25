@@ -13,3 +13,23 @@ export async function getSellerProducts({
   );
   return response.data;
 }
+
+export async function getSellerProductById(id: string) {
+  const response = await Axios.get<SellerProductDto>(
+    `${config.sellerProduct.getById}/${id}`,
+  );
+  return response.data;
+}
+
+export async function getSellerProductsBySubCategoryId({
+  subCategoryId,
+  pagination: { pageNumber, pageSize },
+}: {
+  subCategoryId: number;
+  pagination: PaginationType;
+}) {
+  const response = await Axios.get<PaginationDto<SellerProductDto>>(
+    `${config.sellerProduct.getBySubCategoryId}/${subCategoryId}?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+  );
+  return response.data;
+}

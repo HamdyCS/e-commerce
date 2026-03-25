@@ -10,6 +10,10 @@
   --color-card-light: #f5f5f5;
   --color-card-dark: tansparent;
 
+  --text-small: 16px;
+  --text-medium: 24px;
+  --text-large: 32px;
+
   --spacing-min-card: 280px;
 }
 

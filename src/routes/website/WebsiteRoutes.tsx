@@ -3,6 +3,7 @@ import Home from "../../pages/website/Home";
 import AuthRoutes from "./auth/AuthRoutes";
 import NotFound from "../../pages/errors/NotFound";
 import AccountRoutes from "./account/AccountRoutes";
+import ProductRoutes from "./products/ProductRoutes";
 
 const WebsiteRoutes: RouteObject[] = [
   {
@@ -28,6 +29,7 @@ const WebsiteRoutes: RouteObject[] = [
 
   ...AuthRoutes,
   ...AccountRoutes,
+  ...ProductRoutes,
 ];
 
 export default WebsiteRoutes;
