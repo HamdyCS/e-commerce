@@ -1,12 +1,14 @@
 import { Axios } from "../api/Axios";
 import config from "../config";
+import type CartDto from "../dtos/CartDto";
+import type ForgetPasswordDto from "../dtos/ForgetPasswordDto";
 import type { LoginDto } from "../dtos/LoginDto";
 import type { SignUpDto } from "../dtos/SignUpDto";
-import type ForgetPasswordDto from "../dtos/ForgetPasswordDto";
-import type UserDto from "../dtos/UserDto";
+import type UpdateEmailDto from "../dtos/UpdateEmailDto";
 import type UpdateInfoDto from "../dtos/UpdateInfoDto";
 import type { UpdatePasswordDto } from "../dtos/UpdatePasswordDto";
-import type UpdateEmailDto from "../dtos/UpdateEmailDto";
+import type UserDto from "../dtos/UserDto";
+import { mergeGuestCartWithAuthCart } from "./cartService";
 
 export const isEmailExist = async (email: string) => {
   const response = await Axios.get<boolean>(
@@ -20,9 +22,32 @@ export const signUp = async (data: SignUpDto) => {
   return response.data;
 };
 
-export const login = async (data: LoginDto) => {
+export const login = async (
+  data: LoginDto,
+  cart?: CartDto,
+): Promise<{
+  user: UserDto | null;
+  cart: CartDto | null;
+}> => {
   const response = await Axios.post<UserDto>(`${config.auth.login}`, data);
-  return response.data;
+  const user = response.data;
+
+  //check if user is null
+  if (user === null) {
+    return { user: null, cart: null };
+  }
+
+  //check if user is customer
+  if (
+    user.roles.includes("Customer") &&
+    cart &&
+    cart.sellerProducts.length > 0
+  ) {
+    const newCart = await mergeGuestCartWithAuthCart(cart);
+    return { user, cart: newCart };
+  }
+
+  return { user, cart: null };
 };
 
 export const resetPassword = async (data: ForgetPasswordDto) => {

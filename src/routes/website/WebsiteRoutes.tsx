@@ -6,6 +6,8 @@ import AccountRoutes from "./account/AccountRoutes";
 import ProductRoutes from "./product/ProductRoutes";
 import CategoryRoutes from "./category/CategoryRoutes";
 import BrandRoutes from "./brands/BrandRoutes";
+import CartRoutes from "./cart/CartRoutes";
+import GetActiveCart from "../../components/website/cart/GetActiveCart";
 
 const WebsiteRoutes: RouteObject[] = [
   {
@@ -34,6 +36,12 @@ const WebsiteRoutes: RouteObject[] = [
   ...ProductRoutes,
   ...CategoryRoutes,
   ...BrandRoutes,
+  ...CartRoutes,
 ];
 
-export default WebsiteRoutes;
+const WebsiteRoutesWithCart: RouteObject = {
+  element: <GetActiveCart />,
+  children: WebsiteRoutes,
+};
+
+export default [WebsiteRoutesWithCart];

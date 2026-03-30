@@ -1,5 +1,6 @@
 import {
   faBagShopping,
+  faCartShopping,
   faCircleUser,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
@@ -18,6 +19,7 @@ export default function Navbar() {
   const [showLanguageList, setShowLanguageList] = useState(false);
   const [showAccountList, setShowAccountList] = useState(false);
   const { user } = useAppSelector((state) => state.auth);
+  const { cart } = useAppSelector((state) => state.cart);
 
   const { i18n } = useTranslation();
   const location = useLocation();
@@ -135,6 +137,18 @@ export default function Navbar() {
                 placeholder={t("What are you looking for?")}
               />
               <SearchIcon />
+            </div>
+            <div className="relative group">
+              <FontAwesomeIcon
+                icon={faCartShopping}
+                size="xl"
+                className="text-red-500 group-hover:text-blue-500"
+                cursor="pointer"
+                onClick={() => navigate("/cart")}
+              />
+              <span className="absolute -top-4 -translate-x-1/2 left-0 bg-red-500 text-white group-hover:bg-blue-500 rounded-full text-xs w-5 h-5 flex items-center justify-center">
+                {cart?.sellerProducts.length || 0}
+              </span>
             </div>
             {user && (
               <div className="cursor-pointer relative select-none">

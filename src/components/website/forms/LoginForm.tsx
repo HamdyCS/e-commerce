@@ -49,7 +49,7 @@ export default function LoginForm() {
   return (
     <div className="space-y-4 w-full p-5">
       <h2 className="text-[36px]">{t("Login to E-commerce")}</h2>
-      <p className="text-[16px] text-black">{t("Enter your details below")}</p>
+      <p className="text-small text-black">{t("Enter your details below")}</p>
       <AnimatePresence>
         <form
           onSubmit={formik.handleSubmit}

@@ -7,7 +7,7 @@ import type { SignUpDto } from "../dtos/SignUpDto";
 import type UpdateEmailDto from "../dtos/UpdateEmailDto";
 import type { UpdatePasswordDto } from "../dtos/UpdatePasswordDto";
 import type UserDto from "../dtos/UserDto";
-import { useAppDispatch } from "../redux/hook/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../redux/hook/reduxHooks";
 import { setAuthUser, setAuthUserEmail } from "../redux/slices/authSlice";
 import { setEmail, setOtp } from "../redux/slices/signUpSlice";
 import {
@@ -24,6 +24,8 @@ import type { UseHookOptions } from "./types/UseHookOptions";
 import type { UseSendOtpOptions } from "./types/UseSendOtpOptions";
 import toast from "react-hot-toast";
 import { t } from "i18next";
+import type CartDto from "../dtos/CartDto";
+import { setCart } from "../redux/slices/cartSlice";
 
 //register
 export function useRegister() {
@@ -44,15 +46,33 @@ export function useRegister() {
 export function useLogin() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const cart = useAppSelector((state) => state.cart);
 
-  //userDto => Data type
+  //userDto & cart => Data type
   //AxiosError => Error type
-  //LoginDto => Variables type (mutationFn parameter)
-  return useMutation<UserDto, AxiosError, LoginDto>({
+  //LoginDto & cart => Variables type (mutationFn parameter)
+  return useMutation<
+    {
+      user: UserDto | null;
+      cart: CartDto | null;
+    },
+    AxiosError,
+    LoginDto
+  >({
     mutationKey: ["login"],
-    mutationFn: login,
+    mutationFn: (data) => {
+      if (cart.cart) {
+        return login(data, cart.cart);
+      }
+      return login(data);
+    },
     onSuccess: (data) => {
-      dispatch(setAuthUser(data));
+      if (data.user) {
+        dispatch(setAuthUser(data.user));
+      }
+      if (data.cart) {
+        dispatch(setCart(data.cart));
+      }
       navigate("/");
     },
   });

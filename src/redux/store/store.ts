@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "../slices/authSlice";
 import otpReducer from "../slices/signUpSlice";
 import themeReducer from "../slices/themeSlice";
+import cartReducer from "../slices/cartSlice";
 
 export const store = configureStore({
   reducer: {
     otp: otpReducer,
     auth: authReducer,
     theme: themeReducer,
+    cart: cartReducer,
   },
 });
 

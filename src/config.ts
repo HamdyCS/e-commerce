@@ -36,6 +36,14 @@ const config = {
     getByCategoryId: "seller-products/categories",
     getByBrandId: "seller-products/brands",
   },
+  cart: {
+    getActive: "shopping-carts/active",
+    addToCart: (cartId: number) => `shopping-carts/${cartId}/seller-products`,
+    addItemsToCart: (cartId: number) =>
+      `shopping-carts/${cartId}/seller-products/bulk`,
+    deleteItemFromCart: (cartId: number) =>
+      `shopping-carts/${cartId}/seller-products`,
+  },
 };
 
 export default config;

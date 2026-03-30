@@ -47,10 +47,12 @@ export default function BrandSwiper() {
           </div>
         )}
         {isLoading && (
-          <div className="flex items-center gap-3">
-            <Skeleton width={20} height={20} />
-            <Skeleton width={20} height={20} />
-          </div>
+          <CustomSkeletonTheme>
+            <div className="flex items-center gap-3">
+              <Skeleton width={20} height={20} />
+              <Skeleton width={20} height={20} />
+            </div>
+          </CustomSkeletonTheme>
         )}
       </div>
 

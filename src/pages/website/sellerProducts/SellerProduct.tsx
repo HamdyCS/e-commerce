@@ -1,15 +1,17 @@
-import { useParams } from "react-router-dom";
-import { useGetSellerProductById } from "../../../hooks/sellerProduct";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import Counter from "../../../components/ui/Counter";
-import Button from "../../../components/ui/Button";
-import logo from "../../../assets/logo.png";
 import Skeleton from "react-loading-skeleton";
+import { useParams } from "react-router-dom";
+import logo from "../../../assets/logo.png";
+import Button from "../../../components/ui/Button";
+import Counter from "../../../components/ui/Counter";
 import CustomSkeletonTheme from "../../../components/ui/CustomSkeletonTheme";
+import SellerProductRate from "../../../components/website/sellerProducts/SellerProductRate";
 import RelatedProductSwiper from "../../../components/website/swiper/RelatedProductSwiper";
+import { useGetSellerProductById } from "../../../hooks/sellerProduct";
+import type CartItemDto from "../../../dtos/CartItemDto";
+import { useAddItemToCart } from "../../../hooks/cart";
+import { useAppSelector } from "../../../redux/hook/reduxHooks";
 
 // const fakeImages = [
 //   "https://www.citypng.com/public/uploads/preview/white-ps5-controller-design-gaming-side-view-701751695142713jvjd9h0kfr.png",
@@ -22,18 +24,11 @@ export default function SellerProduct() {
   const { id } = useParams();
   const { data, isLoading } = useGetSellerProductById(id || "");
   const [selectedImage, setSelectedImage] = useState<string>("");
+  const [quantity, setQuantity] = useState<number>(1);
+  const { mutate, isPending: isPendingAddToCart } = useAddItemToCart();
+  const { cart } = useAppSelector((state) => state.cart);
 
   const { t, i18n } = useTranslation();
-
-  const starElements = Array.from({
-    length: 5,
-  }).map((_, i) => (
-    <FontAwesomeIcon
-      icon={faStar}
-      key={i}
-      color={i < Math.round(data?.product.avgRating || 0) ? "gold" : "gray"}
-    />
-  ));
 
   if (isLoading) {
     return (
@@ -117,6 +112,20 @@ export default function SellerProduct() {
     );
   }
 
+  function handleAddCart(): void {
+    const cartItem: CartItemDto = {
+      productId: data?.product.id || 0,
+      quantity: quantity,
+      totalPrice: (data?.price || 0) * quantity,
+      productImageUrl: data?.product.images?.[0].url || "",
+      productNameAr: data?.product.nameAr || "",
+      productNameEn: data?.product.nameEn || "",
+      sellerProductId: data?.id || 0,
+      shoppingCartId: cart?.id || 0,
+    };
+    mutate(cartItem);
+  }
+
   return (
     <div className="space-y-20">
       <div className="flex flex-col lg:flex-row gap-20">
@@ -151,10 +160,10 @@ export default function SellerProduct() {
               : data?.product.nameEn}
           </h2>
           <div className="flex items-center gap-5">
-            <div className="flex items-center gap-2">{starElements}</div>
-            <p>
-              ({data?.product.ratingCount}) {t("Reviews")}
-            </p>
+            <SellerProductRate
+              rate={data?.product.avgRating || 0}
+              reviewCount={data?.product.ratingCount || 0}
+            />
             <div style={{ width: "1px" }} className=" h-8 bg-gray-500"></div>
             <p
               style={{
@@ -200,13 +209,15 @@ export default function SellerProduct() {
             <Counter
               min={1}
               max={data?.numberInStock || 0}
-              value={1}
-              onChange={() => {}}
+              value={quantity}
+              onChange={(value) => setQuantity(value)}
             />
             <Button
               text={t("Add to Cart")}
-              onClick={() => {}}
+              onClick={handleAddCart}
               className="py-2 px-10 bg-red-500 text-white h-11"
+              disabled={data?.numberInStock === 0 || isPendingAddToCart}
+              isLoading={isPendingAddToCart}
             />
           </div>
         </div>
