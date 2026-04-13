@@ -1,6 +1,6 @@
 import type { AxiosError } from "axios";
 
-export interface UseHookOptions<T> {
+export interface HookOptions<T> {
   onSuccess?: (data: T) => void;
   onError?: (error: AxiosError) => void;
 }

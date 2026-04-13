@@ -1,16 +1,17 @@
 import { Navigate, type RouteObject } from "react-router-dom";
-import MyAccount from "../../../components/website/auth/MyAccount";
+import MyAccountLayout from "../../../components/website/layout/MyAccountLayout";
 import RequireAuth from "../../../components/website/auth/RequireAuth";
 import Profile from "../../../pages/website/auth/Profile";
+import Addresses from "../../../pages/website/Addresses/Addresses";
 
-const AccountRoutes: RouteObject[] = [
+const MyAccountRoutes: RouteObject[] = [
   // manage account
   {
     element: <RequireAuth />,
     children: [
       {
         path: "my-account",
-        element: <MyAccount />,
+        element: <MyAccountLayout />,
         children: [
           {
             index: true,
@@ -20,10 +21,14 @@ const AccountRoutes: RouteObject[] = [
             path: "profile",
             element: <Profile />,
           },
+          {
+            path: "addresses",
+            element: <Addresses />,
+          },
         ],
       },
     ],
   },
 ];
 
-export default AccountRoutes;
+export default MyAccountRoutes;

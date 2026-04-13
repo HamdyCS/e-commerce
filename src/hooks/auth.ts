@@ -20,8 +20,8 @@ import {
   updatePassword,
 } from "../services/authService";
 import { checkOtp, sendOtp } from "../services/otpService";
-import type { UseHookOptions } from "./types/UseHookOptions";
-import type { UseSendOtpOptions } from "./types/UseSendOtpOptions";
+import type { HookOptions } from "./types/HookOptions";
+import type { SendOtpOptions } from "./types/SendOtpOptions";
 import toast from "react-hot-toast";
 import { t } from "i18next";
 import type CartDto from "../dtos/CartDto";
@@ -92,7 +92,7 @@ export function useResetPassword() {
 }
 
 //send otp
-export function useSendOtp({ type, onSuccess }: UseSendOtpOptions) {
+export function useSendOtp({ type, onSuccess }: SendOtpOptions) {
   const dispatch = useAppDispatch();
 
   return useMutation({
@@ -118,7 +118,7 @@ export function useSendOtp({ type, onSuccess }: UseSendOtpOptions) {
 }
 
 //check otp
-export function useCheckOtp({ onSuccess }: UseHookOptions<void>) {
+export function useCheckOtp({ onSuccess }: HookOptions<void>) {
   const dispatch = useAppDispatch();
 
   return useMutation({

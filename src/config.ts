@@ -44,6 +44,16 @@ const config = {
     deleteItemFromCart: (cartId: number) =>
       `shopping-carts/${cartId}/seller-products`,
   },
+  city: {
+    getAll: "cities/all",
+  },
+  address: {
+    getAll: "user-addresses/all",
+    getById: "user-addresses",
+    addNew: "user-addresses",
+    update: "user-addresses",
+    delete: "user-addresses",
+  },
 };
 
 export default config;

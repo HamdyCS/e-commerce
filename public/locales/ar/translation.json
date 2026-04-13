@@ -109,5 +109,19 @@
   "In Stock": "متوفر",
   "Out of Stock": "غير متوفر",
   "Related Products": "المنتجات ذات الصلة",
-  "Add To cart": "أضف إلى السلة"
+  "Add To cart": "أضف إلى السلة",
+  "Add Address": "أضف عنوان",
+  "Street": "الشارع",
+  "Set as Default": "تعيين كافتراضي",
+  "Save": "حفظ",
+  "Cancel": "إلغاء",
+  "No Addresses Found Please Add One": "لا يوجد عناوين يرجى إضافة عنوان",
+  "Street is required": "الشارع مطلوب",
+  "Street must be at least 3 characters long": "الشارع يجب أن يكون 3 أحرف على الأقل",
+  "Street must be at most 100 characters long": "الشارع يجب أن يكون 100 حرف على الأكثر",
+  "City is required": "المدينة مطلوبة",
+  "Address added successfully": "تم إضافة العنوان بنجاح",
+  "Failed to add address": "فشل في إضافة العنوان",
+  "Address updated successfully": "تم تحديث العنوان بنجاح",
+  "Failed to update address": "فشل في تحديث العنوان"
 }

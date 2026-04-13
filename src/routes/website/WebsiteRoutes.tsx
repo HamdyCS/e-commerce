@@ -2,7 +2,7 @@ import type { RouteObject } from "react-router-dom";
 import Home from "../../pages/website/Home";
 import AuthRoutes from "./auth/AuthRoutes";
 import NotFound from "../../pages/errors/NotFound";
-import AccountRoutes from "./account/AccountRoutes";
+import MyAccountRoutes from "./account/MyAccountRoutes";
 import ProductRoutes from "./product/ProductRoutes";
 import CategoryRoutes from "./category/CategoryRoutes";
 import BrandRoutes from "./brands/BrandRoutes";
@@ -32,7 +32,7 @@ const WebsiteRoutes: RouteObject[] = [
   },
 
   ...AuthRoutes,
-  ...AccountRoutes,
+  ...MyAccountRoutes,
   ...ProductRoutes,
   ...CategoryRoutes,
   ...BrandRoutes,

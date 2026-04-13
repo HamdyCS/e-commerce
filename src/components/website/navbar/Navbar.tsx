@@ -179,7 +179,10 @@ export default function Navbar() {
                         },
                         {
                           title: t("My Addresses"),
-                          onCLick: () => {},
+                          onCLick: () => {
+                            navigate("/my-account/addresses");
+                            setShowAccountList(false);
+                          },
                           icon: <FontAwesomeIcon icon={faLocationDot} />,
                         },
                         {
