@@ -32,6 +32,61 @@ export default function Navbar() {
     setShowLanguageList(false);
   }
 
+  const LanguageListElement = (
+    <DropDownList
+      onOverlayClick={() => setShowLanguageList(false)}
+      list={[
+        {
+          title: "English",
+          onCLick: () => changeLang("en"),
+        },
+        {
+          title: "العربية",
+          onCLick: () => changeLang("ar"),
+        },
+      ]}
+      className="absolute top-10 -left-1.25 z-50"
+    />
+  );
+
+  const AccountListElement = (
+    <DropDownList
+      onOverlayClick={() => setShowAccountList(false)}
+      list={[
+        {
+          title: t("Manage My Account"),
+          onCLick: () => {
+            navigate("/my-account");
+            setShowAccountList(false);
+          },
+          icon: <FontAwesomeIcon icon={faCircleUser} />,
+        },
+        {
+          title: t("My Orders"),
+          onCLick: () => {},
+          icon: <FontAwesomeIcon icon={faBagShopping} />,
+        },
+        {
+          title: t("My Addresses"),
+          onCLick: () => {
+            navigate("/my-account/addresses");
+            setShowAccountList(false);
+          },
+          icon: <FontAwesomeIcon icon={faLocationDot} />,
+        },
+        {
+          title: t("Logout"),
+          onCLick: () => {
+            navigate("/logout");
+            setShowAccountList(false);
+          },
+          icon: <FontAwesomeIcon icon={faCircleUser} />,
+        },
+      ]}
+      className="absolute top-8 right-0 z-10 "
+    />
+  );
+
   return (
     <div>
       <div className=" bg-black dark:bg-primary-card-dark-bg select-none">
@@ -54,22 +109,7 @@ export default function Navbar() {
               />
             </div>
             <AnimatePresence>
-              {showLanguageList && (
-                <DropDownList
-                  onOverlayClick={() => setShowLanguageList(false)}
-                  list={[
-                    {
-                      title: "English",
-                      onCLick: () => changeLang("en"),
-                    },
-                    {
-                      title: "العربية",
-                      onCLick: () => changeLang("ar"),
-                    },
-                  ]}
-                  className="absolute top-10 -left-1.25 z-50"
-                />
-              )}
+              {showLanguageList && LanguageListElement}
             </AnimatePresence>
           </div>
         </div>
@@ -160,40 +200,7 @@ export default function Navbar() {
                   onClick={() => setShowAccountList((prev) => !prev)}
                 />
                 <AnimatePresence>
-                  {showAccountList && (
-                    <DropDownList
-                      onOverlayClick={() => setShowAccountList(false)}
-                      list={[
-                        {
-                          title: t("Manage My Account"),
-                          onCLick: () => {
-                            navigate("/my-account");
-                            setShowAccountList(false);
-                          },
-                          icon: <FontAwesomeIcon icon={faCircleUser} />,
-                        },
-                        {
-                          title: t("My Orders"),
-                          onCLick: () => {},
-                          icon: <FontAwesomeIcon icon={faBagShopping} />,
-                        },
-                        {
-                          title: t("My Addresses"),
-                          onCLick: () => {
-                            navigate("/my-account/addresses");
-                            setShowAccountList(false);
-                          },
-                          icon: <FontAwesomeIcon icon={faLocationDot} />,
-                        },
-                        {
-                          title: t("Logout"),
-                          onCLick: () => {},
-                          icon: <FontAwesomeIcon icon={faCircleUser} />,
-                        },
-                      ]}
-                      className="absolute top-8 right-0 z-10 "
-                    />
-                  )}
+                  {showAccountList && AccountListElement}
                 </AnimatePresence>
               </div>
             )}

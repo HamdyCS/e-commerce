@@ -6,7 +6,8 @@ import Login from "../../../pages/website/auth/Login";
 import SignUp from "../../../pages/website/auth/SignUp";
 import UpdateEmail from "../../../pages/website/auth/UpdateEmail";
 import UpdatePassword from "../../../pages/website/auth/UpdatePassword";
-import RequireBack from "../../../components/website/auth/RequireGuest";
+import RequireGuest from "../../../components/website/auth/RequireGuest";
+import Logout from "../../../pages/website/auth/Logout";
 
 const AuthRoutes: RouteObject[] = [
   {
@@ -15,7 +16,7 @@ const AuthRoutes: RouteObject[] = [
     children: [
       // auth pages
       {
-        element: <RequireBack />,
+        element: <RequireGuest />,
         children: [
           {
             path: "signup",
@@ -47,6 +48,10 @@ const AuthRoutes: RouteObject[] = [
         ],
       },
     ],
+  },
+  {
+    path: "logout",
+    element: <Logout />,
   },
 ];
 

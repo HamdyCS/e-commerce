@@ -13,7 +13,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setAuthUser(state, action: PayloadAction<UserDto>) {
+    setAuthUser(state, action: PayloadAction<UserDto | null>) {
       state.user = action.payload;
     },
     setAuthUserEmail(state, action: PayloadAction<string>) {

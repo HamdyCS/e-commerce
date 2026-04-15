@@ -13,6 +13,7 @@ import { setEmail, setOtp } from "../redux/slices/signUpSlice";
 import {
   isEmailExist,
   login,
+  logout,
   resetPassword,
   signUp,
   updateEmail,
@@ -50,7 +51,7 @@ export function useLogin() {
 
   //userDto & cart => Data type
   //AxiosError => Error type
-  //LoginDto & cart => Variables type (mutationFn parameter)
+  //LoginDto => Variables type (mutationFn parameter)
   return useMutation<
     {
       user: UserDto | null;
@@ -187,6 +188,21 @@ export function useUpdateEmail() {
     onError: () => {
       toast.error(t("An error occurred while updating the email"));
       navigate("/my-account/profile");
+    },
+  });
+}
+
+//logout
+export function useLogout() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  return useMutation({
+    mutationKey: ["logout"],
+    mutationFn: logout,
+    onSuccess: () => {
+      dispatch(setAuthUser(null));
+      navigate("/");
     },
   });
 }

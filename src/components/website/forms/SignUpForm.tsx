@@ -11,6 +11,7 @@ import Button from "../../ui/Button";
 import FieldError from "../../ui/FieldError";
 import Input from "../../ui/Input";
 import PasswordInput from "../../ui/PasswordInput";
+import PasswordYupValiditionType from "../../../types/PasswordYupValiditionType";
 
 const validationSchema = Yup.object({
   firstName: Yup.string().required("First Name is required"),
@@ -34,17 +35,7 @@ const validationSchema = Yup.object({
       return age >= 18;
     }),
   phoneNumber: Yup.string().required("Phone Number is required"),
-  password: Yup.string()
-    .required("Password is required")
-    .min(6, "Password must be at least 6 characters long")
-    .max(10, "Password must be at most 10 characters long")
-    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-    .matches(/[0-9]/, "Password must contain at least one number")
-    .matches(
-      /[@$!%*?&]/,
-      "Password must contain at least one special character",
-    ),
+  password: PasswordYupValiditionType,
   confirmPassword: Yup.string()
     .required("Confirm Password is required")
     .equals([Yup.ref("password")], "Passwords do not match"),
@@ -101,7 +92,7 @@ export default function SignUpForm({ onChangeEmail }: SignUpFormProps) {
   return (
     <div className="space-y-4 w-full p-5">
       <h2 className="text-[36px]">{t("Create Account")}</h2>
-      <p className="text-[16px] text-black">{t("Enter your details below")}</p>
+      <p className="text-small text-black">{t("Enter your details below")}</p>
       <AnimatePresence>
         <form
           onSubmit={formik.handleSubmit}

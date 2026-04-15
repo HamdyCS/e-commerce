@@ -11,10 +11,13 @@ export default function CitySelector(props: CitySelectorProps) {
   const { data: cities } = useGetAllCities();
   const { i18n } = useTranslation();
 
-
   const cityElements = useMemo(() => {
     return cities?.map((city) => (
-      <option className="p-2 bg-transparent" key={city.id} value={city.id}>
+      <option
+        className="p-2 bg-white dark:bg-black"
+        key={city.id}
+        value={city.id}
+      >
         {i18n.language === "ar" ? city.nameAr : city.nameEn}
       </option>
     ));

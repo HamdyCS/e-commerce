@@ -19,6 +19,7 @@ const config = {
     updateInfo: "authentication",
     updatePassword: "authentication/update-password",
     updateEmail: "authentication/update-email",
+    logout: "authentication/logout",
   },
   category: {
     getAll: "product-categories/all-paged",

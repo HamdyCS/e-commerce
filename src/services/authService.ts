@@ -82,3 +82,8 @@ export const updateEmail = async (data: UpdateEmailDto) => {
   const response = await Axios.put<UserDto>(`${config.auth.updateEmail}`, data);
   return response.data;
 };
+
+export const logout = async () => {
+  const response = await Axios.post(`${config.auth.logout}`);
+  return response.data;
+};
