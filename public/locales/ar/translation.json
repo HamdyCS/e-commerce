@@ -123,5 +123,14 @@
   "Address added successfully": "تم إضافة العنوان بنجاح",
   "Failed to add address": "فشل في إضافة العنوان",
   "Address updated successfully": "تم تحديث العنوان بنجاح",
-  "Failed to update address": "فشل في تحديث العنوان"
+  "Failed to update address": "فشل في تحديث العنوان",
+  "Check out": "الدفع",
+  "Cart Total": "إجمالي السلة",
+  "Cart Items Total": "إجمالي السلة",
+  "Proceed to Payment": "الدفع",
+  "Cash on Delivery": "الدفع عند الاستلام",
+  "Pre-paid": "الدفع المسبق",
+  "Please Add Address": "يرجى إضافة عنوان",
+  "Shipping costs": "تكاليف الشحن",
+  "Total": "الإجمالي"
 }

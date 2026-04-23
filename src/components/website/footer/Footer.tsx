@@ -55,13 +55,13 @@ export default function Footer() {
           </Link>
         </div>
         <div className="flex items-center gap-2">
-          <a href="https://www.facebook.com/" className="hover:text-blue-300">
+          <a href="https://www.facebook.com/" className="hover:text-blue-300 transition-colors duration-300">
             <FacebookRoundedIcon />
           </a>
-          <a href="https://www.youtube.com/" className="hover:text-blue-300">
+          <a href="https://www.youtube.com/" className="hover:text-blue-300 transition-colors duration-300">
             <YouTubeIcon />
           </a>
-          <a href="https://www.whatsapp.com/" className="hover:text-blue-300">
+          <a href="https://www.whatsapp.com/" className="hover:text-blue-300 transition-colors duration-300">
             <WhatsAppIcon className="hover:" />
           </a>
         </div>

@@ -88,7 +88,8 @@ export default function AddAddressModel({ onExit }: AddAddressModelProps) {
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.5 }}
-        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white text-black  p-5 rounded-lg shadow-lg z-51 space-y-7 w-90 lg:w-120 "
+        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+         dark:bg-primary-card-dark-bg bg-card-light p-5 rounded-lg shadow-lg z-51 space-y-7 w-90 lg:w-120 "
       >
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold">{t("Add Address")}</h2>
@@ -137,7 +138,7 @@ export default function AddAddressModel({ onExit }: AddAddressModelProps) {
                 type="checkbox"
                 name="isDefault"
                 id="isDefault"
-                className="w-5 h-5 cursor-pointer accent-blue-500"
+                className="w-5 h-5 cursor-pointer accent-blue-500 rounded-md"
                 checked={fomik.values.isDefault}
                 onChange={fomik.handleChange}
               />

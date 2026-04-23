@@ -27,9 +27,7 @@ export default function ToggleTheme() {
       className="text-2xl"
       toggled={theme === "dark"}
       onToggle={handelChangeTheme}
-      placeholder={undefined}
-      onPointerEnterCapture={undefined}
-      onPointerLeaveCapture={undefined}
+   
     />
   );
 }

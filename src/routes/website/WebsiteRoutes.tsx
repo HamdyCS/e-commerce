@@ -8,6 +8,7 @@ import CategoryRoutes from "./category/CategoryRoutes";
 import BrandRoutes from "./brands/BrandRoutes";
 import CartRoutes from "./cart/CartRoutes";
 import GetActiveCart from "../../components/website/cart/GetActiveCart";
+import PaymentRoutes from "./payment/PaymentRoutes";
 
 const WebsiteRoutes: RouteObject[] = [
   {
@@ -37,6 +38,7 @@ const WebsiteRoutes: RouteObject[] = [
   ...CategoryRoutes,
   ...BrandRoutes,
   ...CartRoutes,
+  ...PaymentRoutes,
 ];
 
 const WebsiteRoutesWithCart: RouteObject = {

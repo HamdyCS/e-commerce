@@ -3,7 +3,7 @@ import SellerProduct from "../../../pages/website/sellerProducts/SellerProduct";
 
 const ProductRoutes: RouteObject[] = [
   {
-    path: "seller-product/:id",
+    path: "seller-products/:id",
     element: <SellerProduct />,
   },
 ];

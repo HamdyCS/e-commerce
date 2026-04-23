@@ -12,6 +12,7 @@ import { useGetSellerProductById } from "../../../hooks/sellerProduct";
 import type CartItemDto from "../../../dtos/CartItemDto";
 import { useAddItemToCart } from "../../../hooks/cart";
 import { useAppSelector } from "../../../redux/hook/reduxHooks";
+import { Helmet } from "@dr.pogodin/react-helmet";
 
 // const fakeImages = [
 //   "https://www.citypng.com/public/uploads/preview/white-ps5-controller-design-gaming-side-view-701751695142713jvjd9h0kfr.png",
@@ -127,106 +128,113 @@ export default function SellerProduct() {
   }
 
   return (
-    <div className="space-y-20">
-      <div className="flex flex-col lg:flex-row gap-20">
-        <div className="flex gap-5">
-          <div className="flex lg:flex-col flex-wrap gap-5">
-            {data?.product.images?.map((image, index) => (
-              <div
-                key={index}
-                className="w-40 h-40 p-5 bg-card-light dark:bg-card-dark cursor-pointer"
-                onClick={() => setSelectedImage(image.url)}
-              >
-                <img
-                  src={image.url}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
-          <div className="w-120 h-120 p-5 bg-card-light dark:bg-card-dark hidden lg:block">
-            <img
-              src={selectedImage || logo}
-              alt="product selected image"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-        <div className="space-y-5 grow">
-          <h2 className="font-bold text-medium">
-            {i18n.language === "ar"
-              ? data?.product.nameAr
-              : data?.product.nameEn}
-          </h2>
-          <div className="flex items-center gap-5">
-            <SellerProductRate
-              rate={data?.product.avgRating || 0}
-              reviewCount={data?.product.ratingCount || 0}
-            />
-            <div style={{ width: "1px" }} className=" h-8 bg-gray-500"></div>
-            <p
-              style={{
-                color: "gold",
-              }}
-            >
-              {(data?.numberInStock || 0) > 0
-                ? t("In Stock")
-                : t("Out of Stock")}
-            </p>
-          </div>
-          <p className="text-medium  ">${data?.price}</p>
-          <p className="text-small">
-            {i18n.language === "ar"
-              ? data?.product.descriptionAr
-              : data?.product.descriptionEn}
-          </p>
-          <div className="w-full max-w-xl h-1 bg-gray-500"></div>
-          <div className="flex items-center gap-5">
-            <p className="text-medium">{t("Color")}:</p>
-            <div className="text-medium capitalize flex items-center gap-2">
-              <p>{data?.product.color}</p>
-              <div
-                className="w-5 h-5 rounded-full"
-                style={{
-                  backgroundColor: data?.product.color,
-                }}
-              ></div>
+    <>
+      <Helmet>
+        <title>
+          {i18n.language === "ar" ? data?.product.nameAr : data?.product.nameEn}
+        </title>
+      </Helmet>
+      <div className="space-y-20">
+        <div className="flex flex-col lg:flex-row gap-20">
+          <div className="flex gap-5">
+            <div className="flex lg:flex-col flex-wrap gap-5">
+              {data?.product.images?.map((image, index) => (
+                <div
+                  key={index}
+                  className="w-40 h-40 p-5 bg-card-light dark:bg-card-dark cursor-pointer"
+                  onClick={() => setSelectedImage(image.url)}
+                >
+                  <img
+                    src={image.url}
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="w-120 h-120 p-5 bg-card-light dark:bg-card-dark hidden lg:block">
+              <img
+                src={selectedImage || logo}
+                alt="product selected image"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
-          <div className="flex gap-5 flex-wrap">
-            <p>
-              {t("Size")}: {data?.product.size}
+          <div className="space-y-5 grow">
+            <h2 className="font-bold text-medium">
+              {i18n.language === "ar"
+                ? data?.product.nameAr
+                : data?.product.nameEn}
+            </h2>
+            <div className="flex items-center gap-5">
+              <SellerProductRate
+                rate={data?.product.avgRating || 0}
+                reviewCount={data?.product.ratingCount || 0}
+              />
+              <div style={{ width: "1px" }} className=" h-8 bg-gray-500"></div>
+              <p
+                style={{
+                  color: "gold",
+                }}
+              >
+                {(data?.numberInStock || 0) > 0
+                  ? t("In Stock")
+                  : t("Out of Stock")}
+              </p>
+            </div>
+            <p className="text-medium  ">${data?.price}</p>
+            <p className="text-small">
+              {i18n.language === "ar"
+                ? data?.product.descriptionAr
+                : data?.product.descriptionEn}
             </p>
-            <p>
-              {t("Height")}: {data?.product.height}
-            </p>
-            <p>
-              {t("Length")}: {data?.product.length}
-            </p>
-          </div>
-          <div className="flex items-center flex-wrap gap-5">
-            <Counter
-              min={1}
-              max={data?.numberInStock || 0}
-              value={quantity}
-              onChange={(value) => setQuantity(value)}
-            />
-            <Button
-              text={t("Add to Cart")}
-              onClick={handleAddCart}
-              className="py-2 px-10 bg-red-500 text-white h-11"
-              disabled={data?.numberInStock === 0 || isPendingAddToCart}
-              isLoading={isPendingAddToCart}
-            />
+            <div className="w-full max-w-xl h-1 bg-gray-500"></div>
+            <div className="flex items-center gap-5">
+              <p className="text-medium">{t("Color")}:</p>
+              <div className="text-medium capitalize flex items-center gap-2">
+                <p>{data?.product.color}</p>
+                <div
+                  className="w-5 h-5 rounded-full"
+                  style={{
+                    backgroundColor: data?.product.color,
+                  }}
+                ></div>
+              </div>
+            </div>
+            <div className="flex gap-5 flex-wrap">
+              <p>
+                {t("Size")}: {data?.product.size}
+              </p>
+              <p>
+                {t("Height")}: {data?.product.height}
+              </p>
+              <p>
+                {t("Length")}: {data?.product.length}
+              </p>
+            </div>
+            <div className="flex items-center flex-wrap gap-5">
+              <Counter
+                min={1}
+                max={data?.numberInStock || 0}
+                value={quantity}
+                onChange={(value) => setQuantity(value)}
+              />
+              <Button
+                text={t("Add to Cart")}
+                onClick={handleAddCart}
+                className="py-2 px-10 bg-red-500 text-white h-11"
+                disabled={data?.numberInStock === 0 || isPendingAddToCart}
+                isLoading={isPendingAddToCart}
+              />
+            </div>
           </div>
         </div>
+        <RelatedProductSwiper
+          productSubCategoryId={
+            data?.product.productSubCategoryId.toString() || ""
+          }
+        />
       </div>
-      <RelatedProductSwiper
-        productSubCategoryId={
-          data?.product.productSubCategoryId.toString() || ""
-        }
-      />
-    </div>
+    </>
   );
 }

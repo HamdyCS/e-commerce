@@ -44,6 +44,8 @@ const config = {
       `shopping-carts/${cartId}/seller-products/bulk`,
     deleteItemFromCart: (cartId: number) =>
       `shopping-carts/${cartId}/seller-products`,
+    updateCartItem: (cartId: number) =>
+      `shopping-carts/${cartId}/seller-products`,
   },
   city: {
     getAll: "cities/all",
@@ -54,6 +56,9 @@ const config = {
     addNew: "user-addresses",
     update: "user-addresses",
     delete: "user-addresses",
+  },
+  shippingCost: {
+    getShippingCostByCityId: "shipping-costs/cities",
   },
 };
 

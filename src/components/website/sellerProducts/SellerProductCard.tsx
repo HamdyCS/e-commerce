@@ -35,7 +35,7 @@ export default function SellerProductCard({
   return (
     <div className="p-5 min-w-min-card product-card text-wrap bg-card-light dark:bg-card-dark border border-black/20 dark:border-white/20 relative rounded-sm group overflow-hidden ">
       <Link
-        to={`/seller-product/${sellerProduct.id}`}
+        to={`/seller-products/${sellerProduct.id}`}
         className="space-y-5 block pb-5"
       >
         <div className="flex justify-center items-center ">

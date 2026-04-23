@@ -15,7 +15,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <button
-      className={`relative bg-blue-500 disabled:bg-gray-500 text-white p-2 rounded-md cursor-pointer min-w-20 h-10  ${className}`}
+      className={`relative bg-blue-500 disabled:bg-gray-500 text-white p-2 rounded-md cursor-pointer min-w-20 h-10  ${className} text-nowrap hover:bg-blue-600 transition-colors duration-300 `}
       {...props}
     >
       {isLoading ? <Spinner size="20" /> : text}

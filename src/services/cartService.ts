@@ -3,6 +3,7 @@ import config from "../config";
 import type AddItemToCartDto from "../dtos/AddItemToCartDto";
 import type CartDto from "../dtos/CartDto";
 import type CartItemDto from "../dtos/CartItemDto";
+import type UpdateItemQuantityInCartDto from "../dtos/UpdateIteminCartDto";
 
 import {
   getItemFromLocalStorage,
@@ -129,6 +130,48 @@ export async function deleteItemFromCart(
   cart.sellerProducts = cart.sellerProducts.filter(
     (item) => item.sellerProductId !== cartItem.sellerProductId,
   );
+
+  //save cart in local storage
+  localStorage.setItem("cart", JSON.stringify(cart));
+  return cart;
+}
+
+export async function updateCartItemQuantity(
+  isAuthenticated: boolean,
+  sellerProductInShoppingCartId: number,
+  cartItem: CartItemDto,
+) {
+  //authenticated user (update in api)
+  if (isAuthenticated) {
+    const updateCartItemQuantityDto: UpdateItemQuantityInCartDto = {
+      quantity: cartItem.quantity,
+      sellerProductId: cartItem.sellerProductId,
+      shoppingCartId: cartItem.shoppingCartId || 0,
+    };
+    const response = await Axios.put<CartDto>(
+      `${config.cart.updateCartItem(cartItem.shoppingCartId || 0)}/${sellerProductInShoppingCartId}`,
+      updateCartItemQuantityDto,
+    );
+    return response.data;
+  }
+
+  //guest user (update in local storage)
+  const cart = getItemFromLocalStorage<CartDto>("cart");
+
+  //if no cart in local storage, return null
+  if (!cart) {
+    return null;
+  }
+
+  //update item quantity
+  const oldItem = cart.sellerProducts.find(
+    (item) => item.sellerProductId === cartItem.sellerProductId,
+  );
+
+  if (oldItem) {
+    oldItem.quantity = cartItem.quantity;
+    oldItem.totalPrice = cartItem.totalPrice;
+  }
 
   //save cart in local storage
   localStorage.setItem("cart", JSON.stringify(cart));

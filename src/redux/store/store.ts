@@ -10,6 +10,7 @@ export const store = configureStore({
     auth: authReducer,
     theme: themeReducer,
     cart: cartReducer,
+ 
   },
 });
 
