@@ -5,6 +5,12 @@ import type { AxiosError } from "axios";
 export function useGetShippingCostByCityId(cityId: number) {
   return useQuery<number, AxiosError>({
     queryKey: ["shippingCost", cityId],
-    queryFn: () => getShippingCostByCityId(cityId),
+    queryFn: async () => {
+      if (!cityId) return 0;
+
+      const data = await getShippingCostByCityId(cityId);
+
+      return data;
+    },
   });
 }

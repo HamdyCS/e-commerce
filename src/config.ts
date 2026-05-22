@@ -60,6 +60,13 @@ const config = {
   shippingCost: {
     getShippingCostByCityId: "shipping-costs/cities",
   },
+  payment: {
+    cashOnDelivery: "shopping-carts/payments/cash-on-delivery",
+    prePaid: "shopping-carts/payments/pre-paid",
+  },
+  applicationOrderSummery: {
+    latest: "applications/latest-application-order-summary",
+  },
 };
 
 export default config;

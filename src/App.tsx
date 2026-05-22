@@ -10,7 +10,6 @@ import AuthProvider from "./components/website/auth/AuthProvider";
 import { useAppSelector } from "./redux/hook/reduxHooks";
 import { Toaster } from "react-hot-toast";
 
-
 export default function App() {
   const { i18n } = useTranslation();
   const { theme, isDarkTheme } = useAppSelector((state) => state.theme);

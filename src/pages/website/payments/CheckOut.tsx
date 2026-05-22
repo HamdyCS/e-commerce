@@ -11,6 +11,8 @@ import useGetMyAddresses from "../../../hooks/address";
 import CheckOutSkeleton from "../../../components/Skeleton/checkout/CheckOutSkeleton";
 import type AddressDto from "../../../dtos/AddressDto";
 import { useGetShippingCostByCityId } from "../../../hooks/shippingCost";
+import { useCashOnDeliveryPayment } from "../../../hooks/payment";
+import type PaymentCashOnDeliveryDto from "../../../dtos/payment/PaymentCashOnDeliveryDto";
 
 export default function CheckOut() {
   const cart = useAppSelector((state: RootState) => state.cart);
@@ -21,9 +23,25 @@ export default function CheckOut() {
   const [selectedAddress, setSelectedAddress] = useState<AddressDto | null>(
     null,
   );
+
   const { data: shippingCost } = useGetShippingCostByCityId(
     selectedAddress?.cityId || 0,
   );
+
+  //payment methods
+  //cash on delivery
+  const { mutate: cashOnDelivery, isPending } = useCashOnDeliveryPayment();
+
+  //hanedl payment
+  const handlePayment = () => {
+    if (paymentMethod === "cash") {
+      const paymentCashOnDeliveryDto: PaymentCashOnDeliveryDto = {
+        shoppingCartId: cart.cart?.id || 0,
+        userAddressId: selectedAddress?.id || 0,
+      };
+      cashOnDelivery(paymentCashOnDeliveryDto);
+    }
+  };
 
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -136,7 +154,9 @@ export default function CheckOut() {
               <Button
                 className=""
                 text={t("Proceed to Payment")}
-                onClick={() => {}}
+                onClick={handlePayment}
+                disabled={isPending || cart.cart?.sellerProducts.length === 0}
+                isLoading={isPending}
               />
             </div>
           </div>
