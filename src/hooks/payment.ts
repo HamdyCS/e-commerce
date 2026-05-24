@@ -84,3 +84,18 @@ export function usePaymentBySessionId(sessionId: string) {
     },
   });
 }
+
+export function usePrePaidPayment() {
+  return useMutation({
+    mutationFn: (paymentPrePaidDto: PaymentPrePaidDto) =>
+      prePaidPayment(paymentPrePaidDto),
+
+    onSuccess(data) {
+      window.location.href = data.sessionUrl;
+    },
+
+    onError(error) {
+      toast.error(t("Payment failed"));
+    },
+  });
+}
