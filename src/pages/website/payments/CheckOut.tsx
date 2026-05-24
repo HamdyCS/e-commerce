@@ -11,8 +11,13 @@ import useGetMyAddresses from "../../../hooks/address";
 import CheckOutSkeleton from "../../../components/Skeleton/checkout/CheckOutSkeleton";
 import type AddressDto from "../../../dtos/AddressDto";
 import { useGetShippingCostByCityId } from "../../../hooks/shippingCost";
-import { useCashOnDeliveryPayment } from "../../../hooks/payment";
+import {
+  useCashOnDeliveryPayment,
+  usePrePaidPayment,
+} from "../../../hooks/payment";
 import type PaymentCashOnDeliveryDto from "../../../dtos/payment/PaymentCashOnDeliveryDto";
+import type { PaymentPrePaidDto } from "../../../dtos/payment/PaymentPrePaidDto";
+import config from "../../../config";
 
 export default function CheckOut() {
   const cart = useAppSelector((state: RootState) => state.cart);
@@ -30,7 +35,11 @@ export default function CheckOut() {
 
   //payment methods
   //cash on delivery
-  const { mutate: cashOnDelivery, isPending } = useCashOnDeliveryPayment();
+  const { mutate: cashOnDelivery, isPending: isCashOnDeliveryPending } =
+    useCashOnDeliveryPayment();
+
+  //pre paid
+  const { mutate: prePaid, isPending: isPrePaidPending } = usePrePaidPayment();
 
   //hanedl payment
   const handlePayment = () => {
@@ -40,6 +49,15 @@ export default function CheckOut() {
         userAddressId: selectedAddress?.id || 0,
       };
       cashOnDelivery(paymentCashOnDeliveryDto);
+    } else {
+      const paymentPrePaidDto: PaymentPrePaidDto = {
+        shoppingCartId: cart.cart?.id || 0,
+        userAddressId: selectedAddress?.id || 0,
+        id: 0,
+        successUrl: `${window.location.origin}/${config.payment.success}`,
+        cancelUrl: `${window.location.origin}/${config.payment.failed}`,
+      };
+      prePaid(paymentPrePaidDto);
     }
   };
 
@@ -155,8 +173,17 @@ export default function CheckOut() {
                 className=""
                 text={t("Proceed to Payment")}
                 onClick={handlePayment}
-                disabled={isPending || cart.cart?.sellerProducts.length === 0}
-                isLoading={isPending}
+                disabled={
+                  isCashOnDeliveryPending ||
+                  isAddressesPending ||
+                  isPrePaidPending ||
+                  cart.cart?.sellerProducts.length === 0
+                }
+                isLoading={
+                  isCashOnDeliveryPending ||
+                  isAddressesPending ||
+                  isPrePaidPending
+                }
               />
             </div>
           </div>
