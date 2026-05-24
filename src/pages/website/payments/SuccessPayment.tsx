@@ -421,7 +421,6 @@ export default function SuccessPayment() {
 
               <div className="divide-y divide-slate-100 dark:divide-white/5 print:divide-slate-300">
                 {products.map((item, idx) => {
-                  console.log(item);
                   const unitPrice = item.totalPrice / item.quantity;
                   const productName = isAr
                     ? item.productNameAr

@@ -48,6 +48,7 @@ export default function Cart() {
             <div className="flex items-center justify-center">
               <Button
                 className="mx-5"
+                disabled={cart?.cart?.sellerProducts.length === 0}
                 text={t("Check out")}
                 onClick={() => navigate("/checkout")}
               />

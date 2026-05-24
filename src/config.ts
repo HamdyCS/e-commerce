@@ -63,6 +63,9 @@ const config = {
   payment: {
     cashOnDelivery: "shopping-carts/payments/cash-on-delivery",
     prePaid: "shopping-carts/payments/pre-paid",
+    success: "checkout/verify",
+    failed: "checkout/verify",
+    getPaymentBySessionId: "shopping-carts/payments/session",
   },
   applicationOrderSummery: {
     latest: "applications/latest-application-order-summary",
