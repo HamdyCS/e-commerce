@@ -1,23 +1,23 @@
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { Helmet } from "@dr.pogodin/react-helmet";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFileInvoice,
-  faLocationDot,
-  faShoppingBag,
-  faCircleExclamation,
   faArrowLeft,
   faArrowRight,
   faCircleCheck,
+  faCircleExclamation,
+  faFileInvoice,
+  faLocationDot
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import CustomSkeletonTheme from "../../../components/ui/CustomSkeletonTheme";
+import { useNavigate } from "react-router-dom";
 import Button from "../../../components/ui/Button";
+import CustomSkeletonTheme from "../../../components/ui/CustomSkeletonTheme";
+import SummaryCartItem from "../../../components/website/cart/SummaryCartItem";
+import { formatDate } from "../../../helper/helper";
 import { useGetLatestUserApplicationOrderSummary } from "../../../hooks/applicationOrderSummary";
-import logo from "../../../assets/logo.png";
 
 export default function SuccessPayment() {
   const { t, i18n } = useTranslation();
@@ -28,25 +28,6 @@ export default function SuccessPayment() {
     isPending,
     error,
   } = useGetLatestUserApplicationOrderSummary();
-
-  const isAr = i18n.language === "ar";
-
-  // Format Date beautifully
-  const formatDate = (dateString: string | null | undefined) => {
-    if (!dateString) return "";
-    try {
-      const date = new Date(dateString);
-      return date.toLocaleDateString(isAr ? "ar-EG" : "en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-    } catch (e) {
-      return dateString;
-    }
-  };
 
   // Format Delivery Range beautifully
   const formatDeliveryRange = (
@@ -63,14 +44,14 @@ export default function SuccessPayment() {
         year: "numeric",
       };
       const fromFormatted = fromDate.toLocaleDateString(
-        isAr ? "ar-EG" : "en-US",
+        i18n.language === "ar" ? "ar-EG" : "en-US",
         options,
       );
       const toFormatted = toDate.toLocaleDateString(
-        isAr ? "ar-EG" : "en-US",
+        i18n.language === "ar" ? "ar-EG" : "en-US",
         options,
       );
-      return isAr
+      return i18n.language === "ar"
         ? `بين ${fromFormatted} و ${toFormatted}`
         : `Between ${fromFormatted} and ${toFormatted}`;
     } catch (e) {
@@ -306,7 +287,7 @@ export default function SuccessPayment() {
               >
                 <FontAwesomeIcon
                   icon={faCircleCheck}
-                  className="text-7xl mb-5 text-green-300" 
+                  className="text-7xl mb-5 text-green-300"
                 />
               </motion.div>
               <div className="hidden print:block text-center mb-6">
@@ -354,7 +335,7 @@ export default function SuccessPayment() {
                       {t("Order Date")}
                     </span>
                     <span className="text-slate-700 dark:text-slate-300 print-text-dark">
-                      {formatDate(lastApplicationOrderCreatedAt)}
+                      {formatDate(lastApplicationOrderCreatedAt, i18n.language)}
                     </span>
                   </li>
                   <li className="flex justify-between items-center print-flex-row">
@@ -409,60 +390,11 @@ export default function SuccessPayment() {
             </div>
 
             {/* 4. Products Section */}
-            <div className="bg-white dark:bg-[#2c466e]/30 rounded-3xl p-6 border border-slate-100 dark:border-white/5 shadow-xl shadow-slate-100/30 dark:shadow-none print-clean-card">
-              <div className="flex items-center gap-3 mb-6 pb-3 border-b border-slate-100 dark:border-white/5 print:border-slate-300">
-                <div className="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-500 flex items-center justify-center print:bg-slate-100 print:text-black">
-                  <FontAwesomeIcon icon={faShoppingBag} />
-                </div>
-                <h3 className="font-bold text-slate-900 dark:text-white print-text-dark">
-                  {t("Products")}
-                </h3>
-              </div>
-
-              <div className="divide-y divide-slate-100 dark:divide-white/5 print:divide-slate-300">
-                {products.map((item, idx) => {
-                  const unitPrice = item.totalPrice / item.quantity;
-                  const productName = isAr
-                    ? item.productNameAr
-                    : item.productNameEn;
-                  return (
-                    <div
-                      key={item.sellerProductId || idx}
-                      className="py-4 flex gap-4 items-center justify-between first:pt-0 last:pb-0 print-flex-row"
-                    >
-                      <div className="flex items-center gap-4">
-                        {/* Product Image - Hidden on Print */}
-                        <div className="w-16 h-16 rounded-xl border border-slate-100 dark:border-white/10 bg-slate-50 dark:bg-slate-900/40 p-1 flex items-center justify-center shrink-0 no-print overflow-hidden">
-                          <img
-                            src={item.productImageUrl || logo}
-                            alt={productName}
-                            className="max-h-full max-w-full object-contain"
-                          />
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-slate-850 dark:text-slate-100 print-text-dark text-sm line-clamp-2">
-                            {productName}
-                          </h4>
-                          <p className="text-slate-400 dark:text-slate-400 print-text-dark text-xs mt-1">
-                            {t("Price")}: ${unitPrice.toFixed(2)} ×{" "}
-                            {item.quantity}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="text-right shrink-0">
-                        <span className="font-bold text-slate-900 dark:text-white print-text-dark text-sm">
-                          ${item.totalPrice.toFixed(2)}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+            <SummaryCartItem order={orderSummary} />
           </div>
 
           {/* Sidebar Column: Sticky Summary & Action Buttons */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className=" lg:col-span-2 space-y-6">
             {/* 5. Order Summary Card */}
             <div className="bg-white dark:bg-[#2c466e]/30 rounded-3xl p-6 border border-slate-100 dark:border-white/5 shadow-xl shadow-slate-100/30 dark:shadow-none print-clean-card">
               <div className="flex items-center gap-3 mb-6 pb-3 border-b border-slate-100 dark:border-white/5 print:border-slate-300">
@@ -519,7 +451,9 @@ export default function SuccessPayment() {
                     onClick={() => navigate("/")}
                     className="h-11 rounded-xl border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/5 font-semibold text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer select-none"
                   >
-                    <FontAwesomeIcon icon={isAr ? faArrowLeft : faArrowRight} />
+                    <FontAwesomeIcon
+                      icon={i18n.language === "ar" ? faArrowLeft : faArrowRight}
+                    />
                     {t("Continue Shopping")}
                   </button>
                 </div>

@@ -69,6 +69,9 @@ const config = {
   },
   applicationOrderSummery: {
     latest: "applications/latest-application-order-summary",
+    all: "applications/order-application-summaries",
+    getById: (applicationId: string) =>
+      `applications/${applicationId}/order-application-summary`,
   },
 };
 

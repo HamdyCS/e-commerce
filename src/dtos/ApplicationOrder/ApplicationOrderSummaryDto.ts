@@ -12,6 +12,7 @@ export default interface ApplicationOrderSummaryDto {
   returnApplicationCreatedAt: string | null;
   shoppingCartDto: CartDto;
   paymentType: string;
+  applicationOrderTypeId: number;
   applicationOrderType: string;
   estimatedDeliveryFrom: Date | null;
   estimatedDeliveryTo: Date | null;

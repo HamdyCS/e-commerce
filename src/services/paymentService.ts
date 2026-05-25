@@ -4,10 +4,7 @@ import type PaymentCashOnDeliveryDto from "../dtos/payment/PaymentCashOnDelivery
 import type { CashOnDeliveryResultDto } from "../dtos/payment/CashOnDeliveryResultDto";
 import type { PaymentPrePaidDto } from "../dtos/payment/PaymentPrePaidDto";
 import type { PrePaidResultDto } from "../dtos/payment/PrePaidResultDto";
-<<<<<<< HEAD
 import type { PaymentDto } from "../dtos/payment/PaymentDto";
-=======
->>>>>>> 5753e443ad2c12b924adb2d574bcd3a3023b3fd8
 
 export async function cashOnDeliveryPayment(
   paymentCashOnDeliveryDto: PaymentCashOnDeliveryDto,

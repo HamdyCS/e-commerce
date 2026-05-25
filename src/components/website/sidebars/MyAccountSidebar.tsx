@@ -45,12 +45,12 @@ export default function MyAccountSidebar() {
           <li>
             <NavLink
               end
-              to="/my-account/orders/deliverd"
+              to="/my-account/orders"
               className={(x) =>
                 `${x.isActive && "text-blue-500"} hover:text-blue-500`
               }
             >
-              {t("Deliverd Orders")}
+              {t("Orders")}
             </NavLink>
           </li>
           <li>
@@ -63,18 +63,7 @@ export default function MyAccountSidebar() {
             >
               {t("Returned Orders")}
             </NavLink>
-          </li>
-          <li>
-            <NavLink
-              end
-              to="/my-account/orders/Canceld"
-              className={(x) =>
-                `${x.isActive && "text-blue-500"} hover:text-blue-500`
-              }
-            >
-              {t("Canceled Orders")}
-            </NavLink>
-          </li>
+          </li> 
         </ul>
       </div>
     </div>

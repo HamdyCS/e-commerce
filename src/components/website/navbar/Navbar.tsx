@@ -63,7 +63,10 @@ export default function Navbar() {
         },
         {
           title: t("My Orders"),
-          onCLick: () => {},
+          onCLick: () => {
+            navigate("/my-account/orders");
+            setShowAccountList(false);
+          },
           icon: <FontAwesomeIcon icon={faBagShopping} />,
         },
         {

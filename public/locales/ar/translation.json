@@ -60,6 +60,7 @@
   "Back to home page": "العودة إلى الصفحة الرئيسية",
   "Profile": "ملفي الشخصي",
   "Addresses": "عناويني",
+  "Orders": "الطلبات",
   "Deliverd Orders": "الطلبات التي تم توصيلها",
   "Returned Orders": "الطلبات المرتجعة",
   "Canceled Orders": "الطلبات الملغاة",
@@ -170,5 +171,19 @@
   "Cancelled": "ملغي",
   "Retry": "إعادة المحاولة",
   "An error occurred while processing the payment. You can try again.": "حدث خطأ أثناء معالجة الدفع، يمكنك المحاولة مرة أخرى",
-  "Payment Failed": "فشل في الدفع"
+  "Payment Failed": "فشل في الدفع",
+  "The application was submitted": "تم تقديم الطلب",
+  "Address": "العنوان",
+  "Application Number": "رقم الطلب",
+  "Returned": "تم الإرجاع",
+  "Canceled": "تم الإلغاء",
+  "UnderProcessing": "قيد المعالجة",
+  "Under Processing": "قيد المعالجة",
+  "PrePaid": "الدفع المسبق",
+  "CashOnDelivery": "الدفع عند الاستلام",
+  "No return orders found": "لم يتم العثور على طلبات مرتجعة",
+  "No orders found": "لم يتم العثور على طلبات",
+  "Order": "طلب",
+  "View order details": "عرض تفاصيل الطلب",
+  "Order not found": "لم يتم العثور على الطلب"
 }
