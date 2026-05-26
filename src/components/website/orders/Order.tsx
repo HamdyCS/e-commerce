@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import type ApplicationOrderSummaryDto from "../../../dtos/ApplicationOrder/ApplicationOrderSummaryDto";
+import type ApplicationOrderSummaryDto from "../../../dtos/applicationOrder/ApplicationOrderSummaryDto";
 import { formatDate } from "../../../helper/helper";
 import { getApplicationOrderType } from "../../../types/ApplicationOrderTypes";
 import SummaryCartItems from "../cart/SummaryCartItem";

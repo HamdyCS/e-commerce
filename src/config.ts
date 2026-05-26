@@ -73,6 +73,10 @@ const config = {
     getById: (applicationId: string) =>
       `applications/${applicationId}/order-application-summary`,
   },
+  applicationOrder: {
+    cancel: (applicationId: string) =>
+      `applications/${applicationId}/cancel`,
+  },
 };
 
 export default config;

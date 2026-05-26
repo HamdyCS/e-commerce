@@ -185,5 +185,6 @@
   "No orders found": "لم يتم العثور على طلبات",
   "Order": "طلب",
   "View order details": "عرض تفاصيل الطلب",
-  "Order not found": "لم يتم العثور على الطلب"
+  "Order not found": "لم يتم العثور على الطلب",
+  "Cancel Order": "إلغاء الطلب"
 }

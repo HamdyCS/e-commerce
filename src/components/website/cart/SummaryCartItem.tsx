@@ -1,7 +1,7 @@
 import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from "../../../assets/logo.png";
-import type ApplicationOrderSummaryDto from "../../../dtos/ApplicationOrder/ApplicationOrderSummaryDto";
+import type ApplicationOrderSummaryDto from "../../../dtos/applicationOrder/ApplicationOrderSummaryDto";
 import { useTranslation } from "react-i18next";
 
 interface SummeryCartItemsProps {

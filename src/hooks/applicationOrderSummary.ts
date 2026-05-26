@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type ApplicationOrderSummaryDto from "../dtos/ApplicationOrder/ApplicationOrderSummaryDto";
+import type ApplicationOrderSummaryDto from "../dtos/applicationOrder/ApplicationOrderSummaryDto";
 import type { AxiosError } from "axios";
 import {
   getAllUserApplicationOrderSummaries,
@@ -23,7 +23,7 @@ export function useGetAllUserApplicationOrderSummaries() {
 
 export function useGetUserApplicationOrderSummaryById(applicationId: string) {
   return useQuery<ApplicationOrderSummaryDto, AxiosError>({
-    queryKey: ["userApplicationOrderSummaries", applicationId],
+    queryKey: ["userApplicationOrderSummary", applicationId],
     queryFn: () => getApplicationOrderSummaryById(applicationId),
   });
 }

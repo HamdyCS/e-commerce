@@ -1,4 +1,8 @@
-export type ApplicationOrderType = "UnderProcessing" | "Shipped" | "Delivered";
+export type ApplicationOrderType =
+  | "UnderProcessing"
+  | "Shipped"
+  | "Delivered"
+  | "Cancelled";
 
 export function getApplicationOrderType(type: number): ApplicationOrderType {
   switch (type) {
@@ -8,6 +12,8 @@ export function getApplicationOrderType(type: number): ApplicationOrderType {
       return "Shipped";
     case 3:
       return "Delivered";
+    case 4:
+      return "Cancelled";
     default:
       return "UnderProcessing";
   }

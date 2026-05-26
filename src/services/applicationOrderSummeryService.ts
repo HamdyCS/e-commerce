@@ -1,6 +1,6 @@
 import { Axios } from "../api/Axios";
 import config from "../config";
-import type ApplicationOrderSummaryDto from "../dtos/ApplicationOrder/ApplicationOrderSummaryDto";
+import type ApplicationOrderSummaryDto from "../dtos/applicationOrder/ApplicationOrderSummaryDto";
 
 export async function getLatestUserApplicationOrderSummary(): Promise<ApplicationOrderSummaryDto> {
   const res = await Axios.get<ApplicationOrderSummaryDto>(
@@ -26,4 +26,3 @@ export async function getApplicationOrderSummaryById(
   );
   return res.data;
 }
-

@@ -5,7 +5,7 @@ import {
   faCircleCheck,
   faCircleExclamation,
   faFileInvoice,
-  faLocationDot
+  faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "motion/react";
@@ -232,7 +232,7 @@ export default function SuccessPayment() {
     applicationId,
     lastApplicationOrderCreatedAt,
     paymentType,
-    applicationOrderType,
+    lastApplicationOrderType: applicationOrderType,
     userAddressName,
     estimatedDeliveryFrom,
     estimatedDeliveryTo,
